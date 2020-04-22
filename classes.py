@@ -1,36 +1,27 @@
 class Player:
-    def __init__(self, name, pClass):
+    def __init__(self, name, pClass, health, mana, strength, agility):
         self.name = name
         self.pClass = pClass
+        self.hp = health
+        self.mn = mana
+        self.str = strength
+        self.agl = agility
+
         self.round = 1
 
         self.lvl = 1
         self.xp = 0
         self.lvlXp = 200
-        
+
+
 
         if pClass == 0:
-            self.hp = 100
-            self.mn = 50
-            self.str = 20
-            self.agl = 10
-
             self.pClass = "Warrior"
 
         elif pClass == 1:
-            self.hp = 80
-            self.mn = 50
-            self.str = 10
-            self.agl = 20
-
             self.pClass = "Archer"
 
         elif pClass == 2:
-            self.hp = 80
-            self.mn = 100
-            self.str = 5
-            self.agl = 10
-        
             self.pClass = "Mage"
         
         else: 
@@ -71,7 +62,15 @@ class Player:
         other.hp -= self.str
 
         self.round += 1
-         
+
+    def lvlup(self):
+        self.lvl += 1
+        self.hp += 30
+        self.str += 8
+        self.mn += 6
+        self.agl += 5
+        self.lvlXp += 100 + int(round(self.hp/2, 0))
+        self.xp = 0
 
 class Enemy:
     def __init__(self, name, health, mana, strength, agility):

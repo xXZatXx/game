@@ -37,16 +37,29 @@ def start():
 
         if pClass == "1" or pClass == "warrior":
             pClass = 0
+            php = 100
+            pmn = 50
+            pstr = 20
+            pagl = 10
+
         elif pClass == "2" or pClass == "archer":
             pClass = 1
+            php = 80
+            pmn = 50
+            pstr = 10
+            pagl = 20
         elif pClass == "3" or pClass == "mage":
             pClass = 2
+            php = 80
+            pmn = 100
+            pstr = 5
+            pagl = 10
         else:
             print("Error: Wrong class")
 
     clear()
     print("Character created!")
-    player1 = Player(name, pClass)
+    player1 = Player(name, pClass, php, pmn, pstr, pagl)
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -61,7 +74,10 @@ if inp == "1" or inp == "start":
 
     while True:
         player1.stats()
-        
+
+        if player1.xp > player1.lvlXp:
+            player1.lvlup()
+
         print("------------------")
         print("MENU")
         print("1 > Fight")
@@ -96,6 +112,9 @@ if inp == "1" or inp == "start":
 
         elif what == "6":
             exit()
+        
+        elif what == "420":
+            player1.xp = 199
 
 
 elif inp == "2" or inp == "continue":
