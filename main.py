@@ -7,8 +7,8 @@ class Player:
         self.agl = agility
 
     def stats(self):
-        print("Name: ", self.name)
-        print("HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl)
+        print("[ Name: ", self.name, "]")
+        print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
 
 player = Player("Player1", 100, 50, 10, 10)
 
