@@ -3,6 +3,7 @@ class Player:
         self.name = name
         self.pClass = pClass
         self.hp = health
+        self.maxHp = health 
         self.mn = mana
         self.str = strength
         self.agl = agility
@@ -28,8 +29,8 @@ class Player:
             print("Wrong Class")
 
     def stats(self):
-        print("[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
-        print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
+        print("[", self.lvl, "]", "[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
+        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
         self.xpBar()
         print("")
 
@@ -54,10 +55,10 @@ class Player:
 
 
     def showHp(self):
-        print("[ Player HP:", self.hp ,"]")
+        print("[ Player HP:", self.hp, "/", self.maxHp ,"]")
 
     def attack(self, other):
-        print("Round:", self.round)
+        print("| Round:", self.round, "|")
 
         other.hp -= self.str
 
@@ -65,27 +66,28 @@ class Player:
 
     def lvlup(self):
         self.lvl += 1
-        self.hp += 30
+        self.maxHp += 30
         self.str += 8
         self.mn += 6
         self.agl += 5
+        self.xp -= self.lvlXp
         self.lvlXp += 100 + int(round(self.hp/2, 0))
-        self.xp = 0
 
 class Enemy:
     def __init__(self, name, health, mana, strength, agility):
         self.name = name
         self.hp = health
+        self.maxHp = health
         self.mn = mana
         self.str = strength
         self.agl = agility
 
     def stats(self):
         print("[ Enemy Name:", self.name, "]")
-        print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
+        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
 
     def showHp(self):
-        print("[ Enemy HP:", self.hp ,"]")
+        print("[ Enemy HP:", self.hp, "/", self.maxHp, "]")
 
     def attack(self, other):
         other.hp -= self.str

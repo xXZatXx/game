@@ -73,11 +73,11 @@ if inp == "1" or inp == "start":
     start()
 
     while True:
-        player1.stats()
-
-        if player1.xp > player1.lvlXp:
+        if player1.xp >= player1.lvlXp:
             player1.lvlup()
 
+        player1.stats()
+        
         print("------------------")
         print("MENU")
         print("1 > Fight")
@@ -99,8 +99,10 @@ if inp == "1" or inp == "start":
             print(rndNum)
 
             if rndNum in range(1, 6):
+                ogre = Enemy("Ogre", 50, 0, 15, 5) 
                 tempHp = battle(player1, ogre)
                 player1.hp = tempHp
+                player1.round = 1
                 clear()
 
         elif what == "4":
@@ -114,7 +116,7 @@ if inp == "1" or inp == "start":
             exit()
         
         elif what == "420":
-            player1.xp = 199
+            player1.xp += 199
 
 
 elif inp == "2" or inp == "continue":

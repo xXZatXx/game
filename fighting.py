@@ -6,16 +6,18 @@ import enemies
 
 def battle(player, enemy):
     global tempHp
-    print("BATTLE STARTED!")
+    print("==| BATTLE STARTED! |==")
 
     print("Your enemy is:", enemy.name)
+    enemy.stats()
 
     while player.hp > 0:
 
-        player.attack(enemy)
-        print("You attacked the enemy for:", player.str)
-        time.sleep(2)
-
+        if player.agl > enemy.agl and enemy.hp >= 0:
+            player.attack(enemy)
+            print("You attacked the enemy for:", player.str)
+            time.sleep(2)
+        
         if enemy.hp >= 0:
             enemy.attack(player)
             print("Enemy attacked you for:", enemy.str)
@@ -23,10 +25,16 @@ def battle(player, enemy):
 
             player.showHp()
             enemy.showHp()
+            print("")
+            if not player.agl > enemy.agl:
+                player.attack(enemy)
+                print("You attacked the enemy for:")
+                time.sleep(2)
         else:
             enemy.hp = 0
             player.showHp()
             enemy.showHp()
+            print("")
 
             tempHp = player.hp
 
