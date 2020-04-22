@@ -1,8 +1,11 @@
 from random import randint
 import time
+import os
 from classes import * 
 from enemies import *
-from fighting import battle
+from fighting import *
+
+clear = lambda: os.system('cls')
 
 player1 = "none"
 
@@ -41,6 +44,7 @@ def start():
         else:
             print("Error: Wrong class")
 
+    clear()
     print("Character created!")
     player1 = Player(name, pClass)
 
@@ -54,20 +58,51 @@ inp = input(": ").lower()
 
 if inp == "1" or inp == "start":
     start()
-    player1.stats()
+
+    while True:
+        player1.stats()
+        
+        print("------------------")
+        print("MENU")
+        print("1 > Fight")
+        print("2 > Shop")
+        print("3 > Inventory")
+        print("4 > Player info")
+        print("5 > Save")
+        print("")
+        print("6 > Exit")
+        print("------------------\n")
+
+        what = input(": ")
+
+
+        if what == "1":
+            print("Rolling the dice...")
+            time.sleep(2)
+            rndNum = randint(1, 6)
+            print(rndNum)
+
+            if rndNum in range(1, 6):
+                tempHp = battle(player1, ogre)
+                player1.hp = tempHp
+                clear()
+
+        elif what == "4":
+            print("Player info:")
+            player1.stats()
+        
+        elif what == "5":
+            save()
+
+        elif what == "6":
+            exit()
+
+
 elif inp == "2" or inp == "continue":
     #nothing yet
-    print("nice to see ya there")
+    print("AAh")
 elif inp == "3" or inp == "quit":
     exit()
 else:
     print("Error: Wrong input")
-
-print("Rolling the dice...")
-time.sleep(2)
-rndNum = randint(1, 6)
-print(rndNum)
-
-if rndNum in range(1, 6):
-    battle(player1, ogre)
 

@@ -2,8 +2,12 @@ class Player:
     def __init__(self, name, pClass):
         self.name = name
         self.pClass = pClass
-        self.xp = 0
         self.round = 1
+
+        self.lvl = 1
+        self.xp = 0
+        self.lvlXp = 200
+        
 
         if pClass == 0:
             self.hp = 100
@@ -35,6 +39,28 @@ class Player:
     def stats(self):
         print("[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
         print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
+        self.xpBar()
+        print("")
+
+    def xpBar(self):
+        #self.lvl = 1
+        #self.xp = 0
+        #self.lvlXp = 200
+        lineN = 0
+        print("Experience:")
+        prs = ["["," ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "]"]
+        x = self.lvlXp * 10
+        x = x / 100 
+
+        if self.xp > 0:
+            lineN = self.xp/x
+            lineN = round(lineN, 0)
+            
+        for i in range(int(lineN)):
+            prs[i+1] = u"\u25AE"
+
+        print(self.xp, str(prs[0]) + str(prs[1]) + str(prs[2]) + str(prs[3]) + str(prs[4]) + str(prs[5]) + str(prs[6]) + str(prs[7]) + str(prs[8]) + str(prs[9]) + str(prs[10]) + str(prs[11]), self.lvlXp)
+
 
     def showHp(self):
         print("[ Player HP:", self.hp ,"]")
