@@ -71,3 +71,5 @@ print(rndNum)
 if rndNum in range(1, 6):
     battle(player1, ogre)
 
+print("XD")
+
