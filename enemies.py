@@ -1,4 +1,4 @@
-import main import Player
+from classes import Enemie
 
-ogr = Player("Ogr", 50, 50, 15, 5) 
+ogre = Enemie("Ogre", 50, 0, 15, 5) 
 
