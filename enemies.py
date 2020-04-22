@@ -1,4 +1,4 @@
-from classes import Enemie
+from classes import *
 
-ogre = Enemie("Ogre", 50, 0, 15, 5) 
+ogre = Enemy("Ogre", 50, 0, 15, 5) 
 

@@ -2,6 +2,9 @@ class Player:
     def __init__(self, name, pClass):
         self.name = name
         self.pClass = pClass
+        self.xp = 0
+        self.round = 1
+
         if pClass == 0:
             self.hp = 100
             self.mn = 50
@@ -33,7 +36,18 @@ class Player:
         print("[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
         print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
 
-class Enemie:
+    def showHp(self):
+        print("[ Player HP:", self.hp ,"]")
+
+    def attack(self, other):
+        print("Round:", self.round)
+
+        other.hp -= self.str
+
+        self.round += 1
+         
+
+class Enemy:
     def __init__(self, name, health, mana, strength, agility):
         self.name = name
         self.hp = health
@@ -45,4 +59,9 @@ class Enemie:
         print("[ Enemy Name:", self.name, "]")
         print("| HP", self.hp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
 
+    def showHp(self):
+        print("[ Enemy HP:", self.hp ,"]")
 
+    def attack(self, other):
+        other.hp -= self.str
+        

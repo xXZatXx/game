@@ -1,10 +1,19 @@
+from random import randint
+import time
 from classes import * 
-import enemies
+from enemies import *
+from fighting import battle
 
-player = "none"
+player1 = "none"
+
+#progress bar
+#print("[" + u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" + "]")
+
+def save():
+    print(player1)
 
 def start():
-    global player
+    global player1
 
     name = 0
     pClass = 3
@@ -33,7 +42,7 @@ def start():
             print("Error: Wrong class")
 
     print("Character created!")
-    player = Player(name, pClass)
+    player1 = Player(name, pClass)
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -45,7 +54,7 @@ inp = input(": ").lower()
 
 if inp == "1" or inp == "start":
     start()
-    player.stats()
+    player1.stats()
 elif inp == "2" or inp == "continue":
     #nothing yet
     print("nice to see ya there")
@@ -53,3 +62,12 @@ elif inp == "3" or inp == "quit":
     exit()
 else:
     print("Error: Wrong input")
+
+print("Rolling the dice...")
+time.sleep(2)
+rndNum = randint(1, 6)
+print(rndNum)
+
+if rndNum in range(1, 6):
+    battle(player1, ogre)
+
