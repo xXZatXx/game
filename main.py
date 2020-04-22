@@ -45,5 +45,11 @@ inp = input(": ").lower()
 
 if inp == "1" or inp == "start":
     start()
-
-player.stats()
+    player.stats()
+elif inp == "2" or inp == "continue":
+    #nothing yet
+    print("nice to see ya there")
+elif inp == "3" or inp == "quit":
+    exit()
+else:
+    print("Error: Wrong input")
