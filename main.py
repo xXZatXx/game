@@ -12,4 +12,3 @@ class Player:
 
 player = Player("Player1", 100, 50, 10, 10)
 
-player.stats()
