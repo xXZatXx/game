@@ -14,7 +14,40 @@ player1 = "none"
 #print("[" + u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" + "]")
 
 def save():
-    print(player1)
+    #self.name = name
+    #self.pClass = pClass
+    #self.hp = health
+    #self.maxHp = health 
+    #self.mn = mana
+    #self.str = strength
+    #self.agl = agility
+    #self.items = []
+    #self.on = []
+    #self.round = 1
+    #self.lvl = 1
+    #self.xp = 0
+    #self.lvlXp = 200
+    with open("save1.txt", "a") as f:
+        f.write(str(player1.name) + "\n")
+        f.write(str(player1.pClass) + "\n")
+        f.write(str(player1.hp) + "\n")
+        f.write(str(player1.maxHp) + "\n")
+        f.write(str(player1.mn) + "\n")
+        f.write(str(player1.str) + "\n")
+        f.write(str(player1.agl) + "\n")
+        for i in range(len(player1.items)):
+            f.write(str(player1.items[i].name) + "\n")
+        for j in range(len(player1.on)):
+            f.write(str(player1.on[j].name) + "\n")
+        f.write(str(player1.lvl) + "\n")
+        f.write(str(player1.xp) + "\n")
+        f.write(str(player1.lvlXp) + "\n")
+
+    f.close()
+
+        
+
+
 
 def start():
     global player1

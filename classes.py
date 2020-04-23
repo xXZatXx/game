@@ -1,3 +1,5 @@
+from inventory import *
+
 class Player:
     def __init__(self, name, pClass, health, mana, strength, agility):
         self.name = name
@@ -18,6 +20,7 @@ class Player:
 
         if pClass == 0:
             self.pClass = "Warrior"
+            self.giveItem(item4)
 
         elif pClass == 1:
             self.pClass = "Archer"
