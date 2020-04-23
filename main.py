@@ -61,7 +61,7 @@ def start():
     clear()
     print("Character created!")
     player1 = Player(name, pClass, php, pmn, pstr, pagl)
-    player1.items.append(item1)
+    player1.giveItem(item1)
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -120,13 +120,13 @@ if inp == "1" or inp == "start":
                 whichItem = int(input("Item(number): "))
 
                 try:
-                    if isinstance(player1.items[whichItem], Item) == True:
+                    if isinstance(player1.items[whichItem], Potion) == True:
                         #if is a potion
                         player1.items[whichItem].heal(player1)
                         player1.removeItem(player1.items[whichItem])
-                    else:
+                    elif isinstance(player1.items[whichItem], Weapon) == True: 
                         #if is a weapon
-                        print("What?")
+                        player1.equip(player1.items[whichItem])
                 except:
                     print("Wrong item number or nothing in inventory")
 
@@ -148,7 +148,10 @@ if inp == "1" or inp == "start":
         elif what == "4":
             print("Player info:")
             player1.stats()
-        
+            player1.showEquiped()
+
+            tempInp = input("Press Anything")
+
         elif what == "5":
             save()
 
@@ -158,6 +161,9 @@ if inp == "1" or inp == "start":
         elif what == "420":
             player1.xp += 199
 
+        elif what == "69":
+            player1.giveItem(item4)
+
 
 elif inp == "2" or inp == "continue":
     #nothing yet
@@ -166,5 +172,3 @@ elif inp == "3" or inp == "quit":
     exit()
 else:
     print("Error: Wrong input")
-
-print("yeet")

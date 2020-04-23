@@ -8,14 +8,13 @@ class Player:
         self.str = strength
         self.agl = agility
         self.items = []
+        self.on = []
 
         self.round = 1
 
         self.lvl = 1
         self.xp = 0
         self.lvlXp = 200
-
-
 
         if pClass == 0:
             self.pClass = "Warrior"
@@ -29,8 +28,27 @@ class Player:
         else: 
             print("Wrong Class")
 
+
+    def equip(self, item):
+        self.on.append(item)
+        for i in range(len(self.on)):
+            self.hp += self.on[i].hp 
+            self.mn += self.on[i].mn 
+            self.str += self.on[i].str
+            self.agl += self.on[i].agl
+
+        self.items.remove(item)
+
     def removeItem(self, item):
         self.items.remove(item)
+
+    def giveItem(self, item):
+        self.items.append(item)
+
+    def showEquiped(self):
+        print("[ Equiped ]")
+        for i in range(len(self.on)):
+            print(self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
 
     def showInv(self):
         for i in range(len(self.items)):
