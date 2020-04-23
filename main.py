@@ -4,6 +4,7 @@ import os
 from classes import * 
 from enemies import *
 from fighting import *
+from inventory import *
 
 clear = lambda: os.system('cls')
 
@@ -60,6 +61,7 @@ def start():
     clear()
     print("Character created!")
     player1 = Player(name, pClass, php, pmn, pstr, pagl)
+    player1.items.append(item1)
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -105,6 +107,44 @@ if inp == "1" or inp == "start":
                 player1.round = 1
                 clear()
 
+        elif what == "3":
+            print("[ Inventory ]")
+            print("==================")
+            player1.showInv()
+            print("==================")
+            print("1 > Use  2 > Info  3 > Drop")
+
+            invOp = input("")
+            
+            if invOp == "1":
+                whichItem = int(input("Item(number): "))
+
+                try:
+                    if isinstance(player1.items[whichItem], Item) == True:
+                        #if is a potion
+                        player1.items[whichItem].heal(player1)
+                        player1.removeItem(player1.items[whichItem])
+                    else:
+                        #if is a weapon
+                        print("What?")
+                except:
+                    print("Wrong item number or nothing in inventory")
+
+            if invOp == "2":
+                whichItem = int(input("Item(number): "))
+                try:
+                    if isinstance(player1.items[whichItem], Item) == True:
+                        #if is a potion
+                        player1.items[whichItem].showDescription()
+                        print("Return(write anything)")
+                        tempInp = input(": ")
+
+                    else:
+                        #if is a weapon
+                        print("What?")
+                except: 
+                    print("Wrong item number or nothing in inventory")
+
         elif what == "4":
             print("Player info:")
             player1.stats()
@@ -127,3 +167,4 @@ elif inp == "3" or inp == "quit":
 else:
     print("Error: Wrong input")
 
+print("yeet")

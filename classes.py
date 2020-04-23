@@ -7,6 +7,7 @@ class Player:
         self.mn = mana
         self.str = strength
         self.agl = agility
+        self.items = []
 
         self.round = 1
 
@@ -27,6 +28,13 @@ class Player:
         
         else: 
             print("Wrong Class")
+
+    def removeItem(self, item):
+        self.items.remove(item)
+
+    def showInv(self):
+        for i in range(len(self.items)):
+            print(i, "|", self.items[i].name)
 
     def stats(self):
         print("[", self.lvl, "]", "[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
