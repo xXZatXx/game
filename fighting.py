@@ -42,14 +42,14 @@ def battle(player, enemy):
 
             player.hp = 0 
             print("YOU HAVE WON!")
-            dropXp = randint(15, 30)
+            dropXp = randint(15, 30) + int(round(player.lvlXp/25, 0))
 
             print("You've got", dropXp, "xp")
             player.xp += dropXp
 
             enemy.dropItems(player)
 
-            tempInp = input("Press anything to return")
+            tempInp = input("Press Enter to return")
 
             print("You will return in...")
             print("3")

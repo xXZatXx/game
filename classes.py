@@ -134,7 +134,7 @@ class Enemy:
         other.hp -= self.str
 
     def dropItems(self, player):
-        rand = randint(1, 9)
+        rand = randint(0, 9)
         if rand > 4:
             loot = random.choice(self.drop)
             print("[ Loot:", loot.name, "]")

@@ -182,6 +182,7 @@ def game():
 
         elif what == "3":
             while True:
+                clear()
                 print("[ Inventory ]")
                 print("==================")
                 player1.showInv()
@@ -212,7 +213,7 @@ def game():
                         if isinstance(player1.items[whichItem], Item) == True:
                             #if is a potion
                             player1.items[whichItem].showDescription()
-                            print("Return(write anything)")
+                            print("Press Enter to return")
                             tempInp = input(": ")
 
                         else:
@@ -242,7 +243,7 @@ def game():
             player1.stats()
             player1.showEquiped()
 
-            tempInp = input("Press Anything")
+            tempInp = input("Press Enter to return")
 
         elif what == "5":
             save()
@@ -255,6 +256,15 @@ def game():
 
         elif what == "69":
             player1.giveItem(item4)
+        
+        elif "give item" in what:
+            what = what.replace("give item ", "")
+            
+            try:
+                player1.giveItem(globals()[what])
+            except:
+                print("Wrong item name")
+            
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -295,7 +305,8 @@ elif inp == "2" or inp == "continue":
         elif lol[0][1] == "Mage":
             lol[0][1] = 2
 
-        player1 = Player(lol[0][0], lol[0][1], int(lol[0][2]), int(lol[0][4]), int(lol[0][5]), int(lol[0][6]))
+        player1 = Player(lol[0][0], lol[0][1], int(lol[0][3]), int(lol[0][4]), int(lol[0][5]), int(lol[0][6]))
+        player1.hp = int(lol[0][2])
         player1.lvl = int(lol[0][7])
         player1.xp = int(lol[0][8])
         player1.lvlXp = int(lol[0][9])
@@ -304,7 +315,7 @@ elif inp == "2" or inp == "continue":
             player1.giveItem(globals()[lol[1][i]])
 
         for j in range(len(lol[2])):
-            player1.on.append(globals()[lol[2][i]])
+            player1.on.append(globals()[lol[2][j]])
 
         game()
     
