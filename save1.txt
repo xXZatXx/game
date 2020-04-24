@@ -1,4 +1,4 @@
-YEET
+YEeet
 Warrior
 70
 100
@@ -6,5 +6,5 @@ Warrior
 25
 10
 1
-21
+26
 200

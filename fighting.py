@@ -2,7 +2,6 @@ import time
 from random import randint
 
 from classes import *
-import enemies
 
 def battle(player, enemy):
     global tempHp
@@ -45,7 +44,7 @@ def battle(player, enemy):
             print("You've got", dropXp, "xp")
             player.xp += dropXp
 
-            print(tempHp)
+            enemy.dropItems(player)
 
             print("You will return in...")
             print("3")

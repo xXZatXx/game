@@ -1,5 +1,9 @@
 from inventory import *
-from main import clear
+import os 
+from random import randint
+import random
+
+clear = lambda: os.system('cls')
 
 class Player:
     def __init__(self, name, pClass, health, mana, strength, agility):
@@ -105,14 +109,19 @@ class Player:
         self.xp -= self.lvlXp
         self.lvlXp += 100 + int(round(self.hp/2, 0))
 
+
+
+
+
 class Enemy:
-    def __init__(self, name, health, mana, strength, agility):
+    def __init__(self, name, drop, health, mana, strength, agility):
         self.name = name
         self.hp = health
         self.maxHp = health
         self.mn = mana
         self.str = strength
         self.agl = agility
+        self.drop = drop
 
     def stats(self):
         print("[ Enemy Name:", self.name, "]")
@@ -123,4 +132,10 @@ class Enemy:
 
     def attack(self, other):
         other.hp -= self.str
+
+    def dropItems(self, player):
+        rand = randint(1, 9)
+        print(rand)
+        if rand > 4:
+            player.giveItem(random.choice(self.drop))
         

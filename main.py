@@ -1,10 +1,11 @@
 from random import randint
 import time
 import os
-from classes import * 
-from enemies import *
+import random
+from classes import Enemy, Player
 from fighting import *
 from inventory import *
+
 
 clear = lambda: os.system('cls')
 
@@ -121,6 +122,7 @@ def start():
             pagl = 20
 
             player1 = Player(name, pClass, php, pmn, pstr, pagl)
+            player1.giveItem(item5)
 
         elif pClass == "3" or pClass == "mage":
             pClass = 2
@@ -130,6 +132,7 @@ def start():
             pagl = 10
 
             player1 = Player(name, pClass, php, pmn, pstr, pagl)
+            player1.giveItem(item6)
 
         else:
             print("Error: Wrong class")
@@ -166,8 +169,12 @@ def game():
             print(rndNum)
 
             if rndNum in range(1, 6):
-                ogre = Enemy("Ogre", 50, 0, 15, 5) 
-                tempHp = battle(player1, ogre)
+                ogre = Enemy("Ogre", [item7, item1] ,50, 0, 15, 5) 
+                dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25)
+                
+                enemies = [ogre, dwarf]
+
+                tempHp = battle(player1, random.choice(enemies))
                 player1.hp = tempHp
                 player1.round = 1
                 clear()
@@ -193,6 +200,8 @@ def game():
                         elif isinstance(player1.items[whichItem], Weapon) == True: 
                             #if is a weapon
                             player1.equip(player1.items[whichItem])
+                        else:
+                            print("You can't use this item")
                     except:
                         print("Wrong item number or nothing in inventory")
 
