@@ -15,22 +15,24 @@ def battle(player, enemy):
             print("You D I E D :c")
             exit()
 
+
+
         if player.agl > enemy.agl and enemy.hp >= 0:
-            player.attack(enemy)
-            print("You attacked the enemy for:", player.str)
+            dmg = player.attack(enemy)
+            print("You attacked the enemy for:", dmg)
             time.sleep(2)
         
         if enemy.hp >= 0:
-            enemy.attack(player)
-            print("Enemy attacked you for:", enemy.str)
+            dmg = enemy.attack(player)
+            print("Enemy attacked you for:", dmg)
             time.sleep(2)
 
             player.showHp()
             enemy.showHp()
             print("")
             if not player.agl > enemy.agl:
-                player.attack(enemy)
-                print("You attacked the enemy for:")
+                dmg = player.attack(enemy)
+                print("You attacked the enemy for:", dmg)
                 time.sleep(2)
         else:
             enemy.hp = 0
@@ -48,6 +50,10 @@ def battle(player, enemy):
             player.xp += dropXp
 
             enemy.dropItems(player)
+            rand = randint(1, 10)
+
+            player.money += (enemy.moneyDrop + rand)
+            print(enemy.moneyDrop + rand, "$") 
 
             tempInp = input("Press Enter to return")
 

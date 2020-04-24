@@ -50,6 +50,7 @@ def save():
         f.write(str(player1.lvl) + "\n")
         f.write(str(player1.xp) + "\n")
         f.write(str(player1.lvlXp) + "\n")
+        f.write(str(player1.money) + "\n")
 
     f.close()
 
@@ -170,8 +171,8 @@ def game():
             print(rndNum)
 
             if rndNum in range(1, 6):
-                ogre = Enemy("Ogre", [item7, item1] ,50, 0, 15, 5) 
-                dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25)
+                ogre = Enemy("Ogre", [item7, item1] ,50, 0, 15, 5, 20) 
+                dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25, 15)
                 
                 enemies = [ogre, dwarf]
 
@@ -202,6 +203,9 @@ def game():
                         elif isinstance(player1.items[whichItem], Weapon) == True: 
                             #if is a weapon
                             player1.equip(player1.items[whichItem])
+                        elif isinstance(player1.items[whichItem], Bag) == True: 
+                            #if is a bag
+                            player1.items[whichItem].giveLoot(player1)
                         else:
                             print("You can't use this item")
                     except:
@@ -310,6 +314,7 @@ elif inp == "2" or inp == "continue":
         player1.lvl = int(lol[0][7])
         player1.xp = int(lol[0][8])
         player1.lvlXp = int(lol[0][9])
+        player1.money = int(lol[0][10])
 
         for i in range(len(lol[1])):
             player1.giveItem(globals()[lol[1][i]])

@@ -14,6 +14,7 @@ class Player:
         self.mn = mana
         self.str = strength
         self.agl = agility
+        self.money = 0
         self.items = []
         self.on = []
 
@@ -65,8 +66,8 @@ class Player:
 
     def stats(self):
         clear()
-        print("[", self.lvl, "]", "[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
-        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
+        print("[", self.lvl, "]", "[ Name:", self.name, "]", "[ Class:", self.pClass, "]")
+        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|", "Money:", self.money, "$", "|")
         self.xpBar()
         print("")
 
@@ -94,11 +95,22 @@ class Player:
         print("[ Player HP:", self.hp, "/", self.maxHp ,"]")
 
     def attack(self, other):
+        
         print("| Round:", self.round, "|")
-
-        other.hp -= self.str
-
         self.round += 1
+        rand = randint(1, 100)
+
+        if rand <= 40:
+            dealedDmg = self.str + int(round(self.str/2, 0))
+            print("CRITICAL HIT!")
+            other.hp -= dealedDmg
+
+            return dealedDmg
+        else:
+            other.hp -= self.str
+            return self.str
+
+        
 
     def lvlup(self):
         self.lvl += 1
@@ -114,7 +126,7 @@ class Player:
 
 
 class Enemy:
-    def __init__(self, name, drop, health, mana, strength, agility):
+    def __init__(self, name, drop, health, mana, strength, agility, money):
         self.name = name
         self.hp = health
         self.maxHp = health
@@ -122,6 +134,7 @@ class Enemy:
         self.str = strength
         self.agl = agility
         self.drop = drop
+        self.moneyDrop = money
 
     def stats(self):
         print("[ Enemy Name:", self.name, "]")
@@ -132,11 +145,14 @@ class Enemy:
 
     def attack(self, other):
         other.hp -= self.str
+        return self.str
 
     def dropItems(self, player):
         rand = randint(0, 9)
+
+        print("[ Loot ]")
         if rand > 4:
             loot = random.choice(self.drop)
-            print("[ Loot:", loot.name, "]")
+            print(loot.name)
             player.giveItem(loot)
         
