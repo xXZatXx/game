@@ -41,7 +41,8 @@ class Bag(Item):
         self.varN = varName
         super().__init__(name, varName, description)
 
-    def getLoot(self, player):
+    def giveLoot(self, player):
+        
         print("You have got: ")
         rand = randint(1, 100)
         
@@ -49,6 +50,9 @@ class Bag(Item):
             if self.loot[i].chance <= rand or self.loot[i].chance == 100:
                 print(self.loot[i])
                 player.giveItem(self.loot[i])
+
+            
+            
         
 
 

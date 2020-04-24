@@ -15,6 +15,8 @@ class Player:
         self.str = strength
         self.agl = agility
         self.money = 0
+        self.battles = 0
+        self.bagLimit = 15
         self.items = []
         self.on = []
 
@@ -61,8 +63,18 @@ class Player:
             print(self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
 
     def showInv(self):
-        for i in range(len(self.items)):
-            print(i, "|", self.items[i].name)
+        for i in range(self.bagLimit):
+            if i > 9:
+                if i < len(self.items):
+                    print(i, "|", self.items[i].name)
+                else:
+                    print(i, "|")
+            else:
+                if i < len(self.items):
+                    print(i, " |", self.items[i].name)
+                else:
+                    print(i, " |")
+            
 
     def stats(self):
         clear()

@@ -12,10 +12,18 @@ def battle(player, enemy):
 
     while player.hp > 0:
         if player.hp <= 0:
+            rand = randint(1, 30)
             print("You D I E D :c")
-            exit()
+            print("You dropped", rand, "$")
 
+            if player.money >= rand:
+                player.money -= rand
+            elif player.money < rand:
+                player.money = 0
 
+            player.battles += 1
+
+            break
 
         if player.agl > enemy.agl and enemy.hp >= 0:
             dmg = player.attack(enemy)
@@ -64,5 +72,6 @@ def battle(player, enemy):
             time.sleep(1)
             print("1")
             time.sleep(1)
-                        
+
+            player.battles += 1            
             return tempHp 

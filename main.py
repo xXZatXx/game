@@ -51,6 +51,7 @@ def save():
         f.write(str(player1.xp) + "\n")
         f.write(str(player1.lvlXp) + "\n")
         f.write(str(player1.money) + "\n")
+        f.write(str(player1.battles) + "\n")
 
     f.close()
 
@@ -205,7 +206,11 @@ def game():
                             player1.equip(player1.items[whichItem])
                         elif isinstance(player1.items[whichItem], Bag) == True: 
                             #if is a bag
-                            player1.items[whichItem].giveLoot(player1)
+                            if player1.items != player1.bagLimit:
+                                player1.items[whichItem].giveLoot(player1)
+                                player1.removeItem(player1.items[whichItem])
+                            else:
+                                print("Bag is full")
                         else:
                             print("You can't use this item")
                     except:
@@ -245,6 +250,7 @@ def game():
         elif what == "4":
             print("Player info:")
             player1.stats()
+            print("Number of battles:", player1.battles, "\n")
             player1.showEquiped()
 
             tempInp = input("Press Enter to return")
@@ -263,11 +269,13 @@ def game():
         
         elif "give item" in what:
             what = what.replace("give item ", "")
-            
-            try:
-                player1.giveItem(globals()[what])
-            except:
-                print("Wrong item name")
+            if player1.items != player1.bagLimit:
+                try:
+                    player1.giveItem(globals()[what])
+                except:
+                    print("Wrong item name")
+            else:
+                print("Bag is full")
             
 
 print("IM JUST BORED THE GAME")
@@ -315,6 +323,7 @@ elif inp == "2" or inp == "continue":
         player1.xp = int(lol[0][8])
         player1.lvlXp = int(lol[0][9])
         player1.money = int(lol[0][10])
+        player1.battles = int(lol[0][11])
 
         for i in range(len(lol[1])):
             player1.giveItem(globals()[lol[1][i]])
