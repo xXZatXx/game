@@ -1,4 +1,5 @@
 from inventory import *
+from main import clear
 
 class Player:
     def __init__(self, name, pClass, health, mana, strength, agility):
@@ -20,7 +21,6 @@ class Player:
 
         if pClass == 0:
             self.pClass = "Warrior"
-            self.giveItem(item4)
 
         elif pClass == 1:
             self.pClass = "Archer"
@@ -31,6 +31,8 @@ class Player:
         else: 
             print("Wrong Class")
 
+    def drop(self, item):
+        self.items.remove(item)
 
     def equip(self, item):
         self.on.append(item)
@@ -58,6 +60,7 @@ class Player:
             print(i, "|", self.items[i].name)
 
     def stats(self):
+        clear()
         print("[", self.lvl, "]", "[ Player Name:", self.name, "]", "[ Class:", self.pClass, "]")
         print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
         self.xpBar()
