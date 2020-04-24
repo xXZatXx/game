@@ -11,6 +11,9 @@ def battle(player, enemy):
     enemy.stats()
 
     while player.hp > 0:
+        if player.hp <= 0:
+            print("You D I E D :c")
+            exit()
 
         if player.agl > enemy.agl and enemy.hp >= 0:
             player.attack(enemy)
@@ -45,6 +48,8 @@ def battle(player, enemy):
             player.xp += dropXp
 
             enemy.dropItems(player)
+
+            tempInp = input("Press anything to return")
 
             print("You will return in...")
             print("3")

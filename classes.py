@@ -135,7 +135,8 @@ class Enemy:
 
     def dropItems(self, player):
         rand = randint(1, 9)
-        print(rand)
         if rand > 4:
-            player.giveItem(random.choice(self.drop))
+            loot = random.choice(self.drop)
+            print("[ Loot:", loot.name, "]")
+            player.giveItem(loot)
         

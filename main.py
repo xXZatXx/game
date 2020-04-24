@@ -150,6 +150,7 @@ def game():
         
         print("------------------")
         print("MENU")
+        print("------------------")
         print("1 > Fight")
         print("2 > Shop")
         print("3 > Inventory")
