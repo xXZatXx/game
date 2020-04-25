@@ -283,6 +283,13 @@ def game():
                 print("[ Inventory ]")
                 print("==================")
                 player1.showInv()
+
+                for i in range(len(player1.data)):
+                        try:
+                            print(player1.data[i].name)
+                        except:
+                            print(player1.data[i])
+
                 print("==================")
                 print("1 > Use  2 > Info 3 > Unequip  4 > Drop  5 > Back")
 
@@ -293,11 +300,12 @@ def game():
                     whichItem -= 1
 
                     try:
-                        if isinstance(player1.items[whichItem], Potion) == True:
+                        if isinstance(player1.data[whichItem], Potion) == True:
                             #if is a potion
-                            player1.items[whichItem].heal(player1)
-                            player1.removeItem(player1.items[whichItem])
-                        elif isinstance(player1.items[whichItem], Weapon) == True: 
+                            player1.data[whichItem].heal(player1)
+                            player1.removeItem(player1.data[whichItem])
+
+                        elif isinstance(player1.data[whichItem], Weapon) == True: 
                             #if is a weapon
 
                             if any(isinstance(x, Weapon) for x in player1.on) == True:
@@ -307,9 +315,9 @@ def game():
                                         print("You can equip it, you already have a weapon equiped")
                                         time.sleep(1)
                             else:
-                                player1.equip(player1.items[whichItem])
+                                player1.equip(player1.data[whichItem])
 
-                        elif isinstance(player1.items[whichItem], Helmet) == True: 
+                        elif isinstance(player1.data[whichItem], Helmet) == True: 
                             #if is a helmet
 
                             if any(isinstance(x, Helmet) for x in player1.on) == True:
@@ -319,9 +327,9 @@ def game():
                                         print("You can equip it, you already have a helmet equiped")
                                         time.sleep(1)
                             else:
-                                player1.equip(player1.items[whichItem])
+                                player1.equip(player1.data[whichItem])
 
-                        elif isinstance(player1.items[whichItem], Chestplate) == True: 
+                        elif isinstance(player1.data[whichItem], Chestplate) == True: 
                             #if is a weapon
 
                             if any(isinstance(x, Chestplate) for x in player1.on) == True:
@@ -331,9 +339,9 @@ def game():
                                         print("You can equip it, you already have a chestplate equiped")
                                         time.sleep(1)
                             else:
-                                player1.equip(player1.items[whichItem])
+                                player1.equip(player1.data[whichItem])
 
-                        elif isinstance(player1.items[whichItem], Leggings) == True: 
+                        elif isinstance(player1.data[whichItem], Leggings) == True: 
                             #if is a weapon
 
                             if any(isinstance(x, Leggings) for x in player1.on) == True:
@@ -343,9 +351,9 @@ def game():
                                         print("You can equip it, you already have leggings equiped")
                                         time.sleep(1)
                             else:
-                                player1.equip(player1.items[whichItem])
+                                player1.equip(player1.data[whichItem])
 
-                        elif isinstance(player1.items[whichItem], Boots) == True: 
+                        elif isinstance(player1.data[whichItem], Boots) == True: 
                             #if is a weapon
 
                             if any(isinstance(x, Boots) for x in player1.on) == True:
@@ -355,13 +363,13 @@ def game():
                                         print("You can equip it, you already have boots equiped")
                                         time.sleep(1)
                             else:
-                                player1.equip(player1.items[whichItem])
+                                player1.equip(player1.data[whichItem])
                         
-                        elif isinstance(player1.items[whichItem], Bag) == True: 
+                        elif isinstance(player1.data[whichItem], Bag) == True: 
                             #if is a bag
                             if player1.items != player1.bagLimit:
-                                player1.items[whichItem].giveLoot(player1)
-                                player1.removeItem(player1.items[whichItem])
+                                player1.data[whichItem].giveLoot(player1)
+                                player1.removeItem(player1.data[whichItem])
                             else:
                                 print("Bag is full")
                             time.sleep(1)
@@ -376,10 +384,12 @@ def game():
 
                 if invOp == "2":
                     whichItem = int(input("Item(number): "))
+                    whichItem -= 1
+
                     try:
-                        if isinstance(player1.items[whichItem], Item) == True:
+                        if isinstance(player1.data[whichItem], Item) == True:
                             #if is a potion
-                            player1.items[whichItem].showDescription()
+                            player1.data[whichItem].showDescription()
                             print("Press Enter to return")
                             tempInp = input(": ")
 
@@ -390,14 +400,17 @@ def game():
                         print("Wrong item number or nothing in inventory")
 
                 if invOp == "4":
-                    whichItem = int(input("Item(number):"))
 
-                    inp = input("Are you sure?")
                     print("1 > Yes")
                     print("2 > No")
+                    inp = input("Are you sure?")
 
                     if inp == "1":
-                        player1.drop(player1.items[whichItem])
+                        try:
+                            whichItem = int(input("Item(number):"))
+                            player1.drop(player1.data[whichItem])
+                        except:
+                            print("Something went wrong")
 
                     if inp == "2":
                         pass

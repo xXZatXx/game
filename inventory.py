@@ -51,7 +51,7 @@ class Bag(Item):
         
         for i in range(len(self.loot)):
             if self.loot[i].chance <= rand or self.loot[i].chance == 100:
-                print(self.loot[i])
+                print(self.loot[i].name)
                 player.giveItem(self.loot[i])
 
 class Helmet(Item):

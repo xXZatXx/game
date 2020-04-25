@@ -2,6 +2,7 @@ from inventory import *
 import os 
 from random import randint
 import random
+import time
 
 clear = lambda: os.system('cls')
 
@@ -62,7 +63,11 @@ class Player:
         self.items.remove(item)
 
     def removeItem(self, item):
-        self.items.remove(item)
+        
+        if item in self.items:
+            self.items.remove(item)
+            print("Removed")
+
 
     def giveItem(self, item):
         self.items.append(item)
@@ -73,19 +78,25 @@ class Player:
             print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
 
     def showInv(self):
+        self.data = []
+        self.names = []
 
-        for i in range(self.bagLimit):
-            if i > 8:
-                if i < len(self.items):
-                    print(i+1, "|", self.items[i].name)
-                else:
-                    print(i+1, "|")
+        for i in range(len(self.items)):
+            num = self.items.count(self.items[i])
+            if self.items[i] in self.names:
+                pass
             else:
-                if i < len(self.items):
-                    print(i+1, " |", self.items[i].name)
-                else:
-                    print(i+1, " |")
-            
+                self.data.append(self.items[i])
+                self.names.append(self.items[i])
+                self.names.append(num)
+        
+        for i in range(self.bagLimit):
+            try:
+                print(i+1, "|", self.names[i*2].name, self.names[(i*2)+1])
+            except:
+                print(i+1, "|")
+
+
 
     def stats(self):
         clear()
