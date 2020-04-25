@@ -198,6 +198,8 @@ def game():
         elif what == "3": #inventory
             while True:
                 clear()
+                print("\n")
+                player1.showEquiped()
                 print("[ Inventory ]")
                 print("==================")
                 player1.showInv()
@@ -224,10 +226,57 @@ def game():
                                     if isinstance(player1.on[i], Weapon) == True:
                                         print("You can equip it, you already have a weapon equiped")
                                         time.sleep(1)
-
                             else:
                                 player1.equip(player1.items[whichItem])
 
+                        elif isinstance(player1.items[whichItem], Helmet) == True: 
+                            #if is a helmet
+
+                            if any(isinstance(x, Helmet) for x in player1.on) == True:
+                                
+                                for i in range(len(player1.on)):
+                                    if isinstance(player1.on[i], Helmet) == True:
+                                        print("You can equip it, you already have a helmet equiped")
+                                        time.sleep(1)
+                            else:
+                                player1.equip(player1.items[whichItem])
+
+                        elif isinstance(player1.items[whichItem], Chestplate) == True: 
+                            #if is a weapon
+
+                            if any(isinstance(x, Chestplate) for x in player1.on) == True:
+                                
+                                for i in range(len(player1.on)):
+                                    if isinstance(player1.on[i], Chestplate) == True:
+                                        print("You can equip it, you already have a chestplate equiped")
+                                        time.sleep(1)
+                            else:
+                                player1.equip(player1.items[whichItem])
+
+                        elif isinstance(player1.items[whichItem], Leggings) == True: 
+                            #if is a weapon
+
+                            if any(isinstance(x, Leggings) for x in player1.on) == True:
+                                
+                                for i in range(len(player1.on)):
+                                    if isinstance(player1.on[i], Leggings) == True:
+                                        print("You can equip it, you already have leggings equiped")
+                                        time.sleep(1)
+                            else:
+                                player1.equip(player1.items[whichItem])
+
+                        elif isinstance(player1.items[whichItem], Boots) == True: 
+                            #if is a weapon
+
+                            if any(isinstance(x, Boots) for x in player1.on) == True:
+                                
+                                for i in range(len(player1.on)):
+                                    if isinstance(player1.on[i], Boots) == True:
+                                        print("You can equip it, you already have boots equiped")
+                                        time.sleep(1)
+                            else:
+                                player1.equip(player1.items[whichItem])
+                        
                         elif isinstance(player1.items[whichItem], Bag) == True: 
                             #if is a bag
                             if player1.items != player1.bagLimit:

@@ -50,9 +50,45 @@ class Bag(Item):
                 print(self.loot[i])
                 player.giveItem(self.loot[i])
 
-            
-            
-        
+class Helmet(Item):
+    def __init__(self, name, varName, description, health, mana, strength, agility, chance):
+        self.hp = health
+        self.mn = mana
+        self.str = strength
+        self.agl = agility 
+        self.varN = varName
+        self.chance = chance
+        super().__init__(name, varName, description)
+
+class Chestplate(Item):
+    def __init__(self, name, varName, description, health, mana, strength, agility, chance):
+        self.hp = health
+        self.mn = mana
+        self.str = strength
+        self.agl = agility 
+        self.varN = varName
+        self.chance = chance
+        super().__init__(name, varName, description)
+
+class Leggings(Item):
+    def __init__(self, name, varName, description, health, mana, strength, agility, chance):
+        self.hp = health
+        self.mn = mana
+        self.str = strength
+        self.agl = agility 
+        self.varN = varName
+        self.chance = chance
+        super().__init__(name, varName, description)
+
+class Boots(Item):
+    def __init__(self, name, varName, description, health, mana, strength, agility, chance):
+        self.hp = health
+        self.mn = mana
+        self.str = strength
+        self.agl = agility 
+        self.varN = varName
+        self.chance = chance
+        super().__init__(name, varName, description)
 
 
 item1 = Potion("Small potion", "item1", "A small potion which heals 50hp", 50, 100)
@@ -68,3 +104,13 @@ item7 = Item("Ogre scrap", "item7", "A scrap of ogres chestplate, can be used fo
 
 
 item10 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item11 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item12 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item13 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item14 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item15 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+item16 = Bag("Loot bag", "item10", "Gives you items", [item1, item2])
+
+
+
+item20 = Helmet("Warriors Helmet", "item20", "The best so far helmet for warriors", 20, 0, 5, 0, 30)

@@ -69,10 +69,9 @@ class Player:
     def showEquiped(self):
         print("[ Equiped ]")
         for i in range(len(self.on)):
-            print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl, "\n")
+            print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
 
     def showInv(self):
-        self.showEquiped()
 
         for i in range(self.bagLimit):
             if i > 8:
