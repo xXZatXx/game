@@ -19,12 +19,24 @@ player1 = "none"
 #print("[" + u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" + "]")
 
 def shop(items):
+    itemNames = []
+    for i in range(len(items)):
+        itemNames.append(items[i].name)
+
+    longestName = max(itemNames, key=len)
+    length = len(longestName)
 
     while True:
+        clear()
         print("[ SHOP ]")
+        print("==================")
         for i in range(len(items)):
-            print(i + 1, "|", items[i].name, items[i].price, "$")
+            itemLength = len(items[i].name)
+            diff = length - itemLength 
 
+            print(i + 1, "|", items[i].name + ((diff + 2)*" "), items[i].price, "$")
+
+        print("==================")
         print("1 > Buy  2 > Sell  3 > Back")
 
         inp = input(": ")
@@ -33,13 +45,46 @@ def shop(items):
             whichItem = int(input("Item(number): "))
             whichItem -= 1
 
-            if player1.money >= items[whichItem].price:
-                player1.giveItem(items[whichItem])
-                print("You bought", items[whichItem].name, "for", items[whichItem].price, "$")
-                player1.money -= items[whichItem].price
+            howM = int(input("How many(number):"))
+            print("It will cost", (items[whichItem].price * howM), "$")
+            choice = input("Are you sure you wanna buy it?")
+            print("1 > Yes")
+            print("2 > No")
+            
+            if choice == "1" or choice == "Yes":
+                if player1.money >= (items[whichItem].price * howM):
+                    player1.giveItem(items[whichItem])
+                    print("You bought", items[whichItem].name, "for", (items[whichItem].price * howM), "$")
+                    player1.money -= (items[whichItem].price * howM)
+            else:
+                pass
 
         if inp == "2":
-            pass
+            clear()
+            print("\n")
+            print("[ Inventory ]")
+            print("==================")
+            player1.showInv()
+            print("==================")
+
+            try:
+                whichItem = int(input("Item(number): "))
+                whichItem -= 1
+
+                print("You will get", int(round(player1.items[whichItem].price/2)), "$")
+                print("Are you sure you wanna sell it?")
+                print("1 > Yes")
+                print("2 > No")
+                choices = input(":")
+
+                if choices == "1" or choices == "Yes":
+                    player1.money += int(round(player1.items[whichItem].price/2))
+                    player1.removeItem(player1.items[whichItem])
+                else:
+                    pass
+
+            except:
+                print("Something went wrong try again :)")
 
         if inp == "3":
             break        
