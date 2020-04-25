@@ -18,6 +18,34 @@ player1 = "none"
 #progress bar
 #print("[" + u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" + "]")
 
+def shop(items):
+
+    while True:
+        print("[ SHOP ]")
+        for i in range(len(items)):
+            print(i + 1, "|", items[i].name, items[i].price, "$")
+
+        print("1 > Buy  2 > Sell  3 > Back")
+
+        inp = input(": ")
+
+        if inp == "1":
+            whichItem = int(input("Item(number): "))
+            whichItem -= 1
+
+            if player1.money >= items[whichItem].price:
+                player1.giveItem(items[whichItem])
+                print("You bought", items[whichItem].name, "for", items[whichItem].price, "$")
+                player1.money -= items[whichItem].price
+
+        if inp == "2":
+            pass
+
+        if inp == "3":
+            break        
+
+        print("\n")
+
 def save():
     #self.name = name
     #self.pClass = pClass
@@ -194,6 +222,11 @@ def game():
                 else:
                     print("Your battles arent over 10. You can't fight boss now")
                     time.sleep(1)
+
+        elif what == "2":
+            shop([item1, item2, item3])
+
+            
 
         elif what == "3": #inventory
             while True:
