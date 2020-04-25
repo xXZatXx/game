@@ -179,3 +179,7 @@ class Enemy:
             print(loot.name)
             player.giveItem(loot)
         
+class Boss(Enemy):
+    def __init__(self, name, drop, health, mana, strength, agility, money, experience):
+        self.exp = experience
+        super().__init__(name, drop, health, mana, strength, agility, money)

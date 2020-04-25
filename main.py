@@ -171,7 +171,7 @@ def game():
             rndNum = randint(1, 6)
             print(rndNum)
 
-            if rndNum in range(1, 6):
+            if rndNum in range(1, 5):
                 ogre = Enemy("Ogre", [item7, item1] ,50, 0, 15, 5, 20) 
                 dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25, 15)
                 
@@ -182,7 +182,20 @@ def game():
                 player1.round = 1
                 clear()
 
-        elif what == "3":
+            elif rndNum == 6 :
+                if player1.battles >= 10:
+                    ogreKing = Boss("Ogre King", [item1, item2, item3], 150, 10, 30, 15, 150, 400) 
+                    
+                    enemies = [ogreKing]
+
+                    tempHp = battle(player1, random.choice(enemies))
+                    player1.hp = tempHp
+                    player1.round = 1
+                    clear()
+                else:
+                    print("Your battles arent over 10. You can't fight boss now")
+
+        elif what == "3": #inventory
             while True:
                 clear()
                 print("[ Inventory ]")
@@ -273,7 +286,7 @@ def game():
                 if invOp == "5":
                     break
 
-        elif what == "4":
+        elif what == "4": #player info
             print("Player info:")
             player1.stats()
             print("Number of battles:", player1.battles, "\n")
@@ -281,10 +294,10 @@ def game():
 
             tempInp = input("Press Enter to return")
 
-        elif what == "5":
+        elif what == "5": #saving
             save()
 
-        elif what == "6":
+        elif what == "6": #exit
             exit()
         
         elif what == "420":
@@ -312,11 +325,11 @@ print("3 > Quit")
 inp = input(": ").lower()
 
 
-if inp == "1" or inp == "start":
+if inp == "1" or inp == "start": #start the game
     start()
     game()
 
-elif inp == "2" or inp == "continue":
+elif inp == "2" or inp == "continue": #continue the game from saving slot
     #self.name = name
     #self.pClass = pClass
     #self.hp = health
@@ -359,7 +372,7 @@ elif inp == "2" or inp == "continue":
 
         game()
     
-elif inp == "3" or inp == "quit":
+elif inp == "3" or inp == "quit": #closes the game
     exit()
 else:
     print("Error: Wrong input")

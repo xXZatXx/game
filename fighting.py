@@ -52,7 +52,10 @@ def battle(player, enemy):
 
             player.hp = 0 
             print("YOU HAVE WON!")
-            dropXp = randint(15, 30) + int(round(player.lvlXp/25, 0))
+            if isinstance(enemy, Boss) == True:
+                dropXp = randint(15, 30) + int(enemy.exp)
+            else:
+                dropXp = randint(15, 30) + int(round(player.lvlXp/25, 0))
 
             print("You've got", dropXp, "xp")
             player.xp += dropXp
