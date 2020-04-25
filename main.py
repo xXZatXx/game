@@ -164,7 +164,6 @@ def game():
 
         what = input(": ")
 
-
         if what == "1":
             print("Rolling the dice...")
             time.sleep(2)
@@ -194,6 +193,7 @@ def game():
                     clear()
                 else:
                     print("Your battles arent over 10. You can't fight boss now")
+                    time.sleep(1)
 
         elif what == "3": #inventory
             while True:
