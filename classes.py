@@ -16,7 +16,7 @@ class Player:
         self.agl = agility
         self.money = 0
         self.battles = 0
-        self.bagLimit = 15
+        self.bagLimit = 10
         self.items = []
         self.on = []
 
@@ -41,6 +41,15 @@ class Player:
     def drop(self, item):
         self.items.remove(item)
 
+    def unEquip(self, item):
+        self.on.remove(item)
+        self.hp -= item.hp 
+        self.mn -= item.mn 
+        self.str -= item.str
+        self.agl -= item.agl
+
+        self.giveItem(item)
+
     def equip(self, item):
         self.on.append(item)
         for i in range(len(self.on)):
@@ -60,20 +69,22 @@ class Player:
     def showEquiped(self):
         print("[ Equiped ]")
         for i in range(len(self.on)):
-            print(self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
+            print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl, "\n")
 
     def showInv(self):
+        self.showEquiped()
+
         for i in range(self.bagLimit):
-            if i > 9:
+            if i > 8:
                 if i < len(self.items):
-                    print(i, "|", self.items[i].name)
+                    print(i+1, "|", self.items[i].name)
                 else:
-                    print(i, "|")
+                    print(i+1, "|")
             else:
                 if i < len(self.items):
-                    print(i, " |", self.items[i].name)
+                    print(i+1, " |", self.items[i].name)
                 else:
-                    print(i, " |")
+                    print(i+1, " |")
             
 
     def stats(self):

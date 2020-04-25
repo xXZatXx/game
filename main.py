@@ -189,12 +189,13 @@ def game():
                 print("==================")
                 player1.showInv()
                 print("==================")
-                print("1 > Use  2 > Info  3 > Drop  4 > Back")
+                print("1 > Use  2 > Info 3 > Unequip  4 > Drop  5 > Back")
 
                 invOp = input("")
                 
                 if invOp == "1":
                     whichItem = int(input("Item(number): "))
+                    whichItem -= 1
 
                     try:
                         if isinstance(player1.items[whichItem], Potion) == True:
@@ -203,7 +204,17 @@ def game():
                             player1.removeItem(player1.items[whichItem])
                         elif isinstance(player1.items[whichItem], Weapon) == True: 
                             #if is a weapon
-                            player1.equip(player1.items[whichItem])
+
+                            if any(isinstance(x, Weapon) for x in player1.on) == True:
+                                
+                                for i in range(len(player1.on)):
+                                    if isinstance(player1.on[i], Weapon) == True:
+                                        print("You can equip it, you already have a weapon equiped")
+                                        time.sleep(1)
+
+                            else:
+                                player1.equip(player1.items[whichItem])
+
                         elif isinstance(player1.items[whichItem], Bag) == True: 
                             #if is a bag
                             if player1.items != player1.bagLimit:
@@ -211,10 +222,15 @@ def game():
                                 player1.removeItem(player1.items[whichItem])
                             else:
                                 print("Bag is full")
+                            time.sleep(1)
+
                         else:
                             print("You can't use this item")
+                            time.sleep(1)
+
                     except:
                         print("Wrong item number or nothing in inventory")
+                        time.sleep(1)
 
                 if invOp == "2":
                     whichItem = int(input("Item(number): "))
@@ -231,7 +247,7 @@ def game():
                     except: 
                         print("Wrong item number or nothing in inventory")
 
-                if invOp == "3":
+                if invOp == "4":
                     whichItem = int(input("Item(number):"))
 
                     inp = input("Are you sure?")
@@ -243,8 +259,18 @@ def game():
 
                     if inp == "2":
                         pass
+                
+                if invOp == "3":
+                    whichItem = int(input("Item(number):"))
+                    whichItem -= 1
 
-                if invOp == "4":
+                    try:
+                        player1.unEquip(player1.on[whichItem])
+                    except:
+                        print("Wrong item number or nothing equiped")
+
+
+                if invOp == "5":
                     break
 
         elif what == "4":

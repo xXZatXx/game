@@ -18,11 +18,10 @@ class Potion(Item):
         super().__init__(name, varName, description)
 
     def heal(self, player):
-        
         print(player.name, "has been healed")
         player.hp = player.hp + self.hpAmount
 
-        if player.hp > player.maxHp:
+        if player.hp >= player.maxHp:
             player.hp = player.maxHp
 
 class Weapon(Item):
