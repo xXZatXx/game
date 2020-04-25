@@ -295,7 +295,7 @@ def game():
 
                 invOp = input("")
                 
-                if invOp == "1":
+                if invOp == "1": #using / equiping stuff
                     whichItem = int(input("Item(number): "))
                     whichItem -= 1
 
@@ -382,7 +382,7 @@ def game():
                         print("Wrong item number or nothing in inventory")
                         time.sleep(1)
 
-                if invOp == "2":
+                if invOp == "2": #info about items
                     whichItem = int(input("Item(number): "))
                     whichItem -= 1
 
@@ -399,7 +399,7 @@ def game():
                     except: 
                         print("Wrong item number or nothing in inventory")
 
-                if invOp == "4":
+                if invOp == "4": #droping an item
 
                     print("1 > Yes")
                     print("2 > No")
@@ -408,6 +408,7 @@ def game():
                     if inp == "1":
                         try:
                             whichItem = int(input("Item(number):"))
+                            whichItem -= 1 
                             player1.drop(player1.data[whichItem])
                         except:
                             print("Something went wrong")
@@ -415,7 +416,7 @@ def game():
                     if inp == "2":
                         pass
                 
-                if invOp == "3":
+                if invOp == "3": #unequiping stuff
                     whichItem = int(input("Item(number):"))
                     whichItem -= 1
 
@@ -424,8 +425,7 @@ def game():
                     except:
                         print("Wrong item number or nothing equiped")
 
-
-                if invOp == "5":
+                if invOp == "5": #gettin back
                     break
 
         elif what == "4": #player info
