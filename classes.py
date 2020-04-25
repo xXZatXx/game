@@ -17,6 +17,7 @@ class Player:
         self.money = 0
         self.battles = 0
         self.bagLimit = 10
+        self.saveSlot = 0
         self.items = []
         self.on = []
 
