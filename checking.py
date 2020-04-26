@@ -4,6 +4,7 @@ Str = "Str"
 Agl = "Agl"
 
 Items = ["Item1", "Item2", "Item3", "Item4"]
+Equipped = ["Item1", "Item2", "Item3", "Item3", "Item3", "Item3"]
 Skills = ["Skill1", "Skill2", "Skill3", "Skill4"] 
 
 def save():
@@ -16,6 +17,8 @@ def save():
             f.write(Items[i] + "\n")
         for i in range(len(Skills)):
             f.write(Skills[i] + "\n")
+        for i in range(len(Equipped)):
+            f.write("EQ" + Equipped[i] + "\n")    
 
 def load():
     data = []
@@ -28,7 +31,7 @@ def load():
     player = data
     
     for i in range(len(player)):
-        if "item" in player[i]:
+        if "Item" in player[i]:
             items.append(player[i])
 
     print(items)

@@ -115,5 +115,6 @@ class CraftingScroll(Item):
         super().__init__(name, varName, description, price)
 
     def learn(self, player):
+        pass
         
     
