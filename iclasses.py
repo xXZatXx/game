@@ -106,3 +106,15 @@ class Boots(Item):
         self.recipe = recipe
         super().__init__(name, varName, description, price, recipe)
 
+class CraftingScroll(Item):
+    def __init__(self, name, varName, description, price, chance, item):
+        self.varN = varName
+        self.chance = chance
+        self.price = price
+        self.item = item
+        super().__init__(name, varName, description, price)
+
+    def learn(self, player):
+        pass
+        
+    

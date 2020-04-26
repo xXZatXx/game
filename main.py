@@ -109,10 +109,6 @@ def save(saveSlot): #saving the game
 
     if os.path.exists('save' + str(saveSlot) + '.txt'):
         os.remove('save' + str(saveSlot) + '.txt') 
-    if os.path.exists('save' + str(saveSlot) + 'i.txt'):
-        os.remove('save' + str(saveSlot) + 'i.txt') 
-    if os.path.exists('save' + str(saveSlot) + 'e.txt'):
-        os.remove('save' + str(saveSlot) + 'e.txt') 
 
     with open("save"+ str(saveSlot) +".txt", "a") as f:
         f.write(str(player1.name) + "\n")
@@ -129,32 +125,24 @@ def save(saveSlot): #saving the game
         f.write(str(player1.battles) + "\n")
         f.write(str(player1.saveSlot) + "\n")
 
+        for i in range(len(player1.items)):
+            f.write(str(player1.items[i].varN + "\n"))
+
+        for i in range(len(player1.on)):
+            f.write(str(player1.on[i].varN.upper() + "\n"))
+
     f.close()
 
-    with open("save"+ str(saveSlot) +"i.txt", "a") as f2:
-        for i in range(len(player1.items)):
-            f2.write(str(player1.items[i].varN) + "\n")
-
-    f2.close()
-
-    with open("save"+ str(saveSlot) +"e.txt", "a") as f3:
-        for j in range(len(player1.on)):
-            f3.write(str(player1.on[j].varN) + "\n")
-
-    f3.close()
 
 def load(saveSlot): #loading the game
     with open("save" + str(saveSlot) + ".txt", "r") as f:
         for line in f:
-            info.append(line.replace("\n", ""))
-
-    with open("save" + str(saveSlot) + "i.txt", "r") as f2:
-        for line in f2:
-            items.append(line.replace("\n", ""))
-
-    with open("save" + str(saveSlot) + "e.txt", "r") as f3:
-        for line in f3:
-            eq.append(line.replace("\n", ""))
+            if "item" in line:
+                items.append(line.replace("\n", ""))
+            elif "ITEM" in line:
+                eq.append(line.replace("\n", "").lower())
+            else:
+                info.append(line.replace("\n", ""))
 
     if info == []:
         print("Nothing to load")

@@ -20,6 +20,8 @@ class Player:
         self.battles = 0
         self.bagLimit = 10
         self.saveSlot = 0
+        
+        self.recipes = []
         self.items = []
         self.on = []
 
@@ -96,7 +98,6 @@ class Player:
         if item in self.items:
             self.items.remove(item)
 
-
     def giveItem(self, item):
         self.items.append(item)
 
@@ -141,10 +142,6 @@ class Player:
             except:
                 print(i+1, yeet)
 
-        
-
-
-
     def stats(self):
         clear()
         print("[", self.lvl, "]", "[ Name:", self.name, "]", "[ Class:", self.pClass, "]")
@@ -171,7 +168,6 @@ class Player:
 
         print(self.xp, str(prs[0]) + str(prs[1]) + str(prs[2]) + str(prs[3]) + str(prs[4]) + str(prs[5]) + str(prs[6]) + str(prs[7]) + str(prs[8]) + str(prs[9]) + str(prs[10]) + str(prs[11]), self.lvlXp)
 
-
     def showHp(self):
         print("[ Player HP:", self.hp, "/", self.maxHp ,"]")
 
@@ -190,8 +186,6 @@ class Player:
         else:
             other.hp -= self.str
             return self.str
-
-        
 
     def lvlup(self):
         self.lvl += 1
