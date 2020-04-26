@@ -106,4 +106,3 @@ class Boots(Item):
         self.recipe = recipe
         super().__init__(name, varName, description, price, recipe)
 
-
