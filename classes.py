@@ -1,4 +1,5 @@
-from inventory import *
+from iclasses import *
+from items import *
 import os 
 from random import randint
 import random
@@ -40,6 +41,30 @@ class Player:
         else: 
             print("Wrong Class")
 
+    def craft(self, item):
+        data = list(dict.fromkeys(item.recipe))
+        checking = []
+
+        for i in range(len(data)):
+            if self.items.count(data[i]) >= item.recipe.count(data[i]):
+                checking.append(True)
+            else:
+                checking.append(False)
+
+        if all(checking):
+            print("Crafting", item.name)
+            for j in range(len(item.recipe)):
+                self.removeItem(item.recipe[j])
+
+            self.giveItem(globals()[item.varN])
+            time.sleep(2)
+        else:
+            missing = checking.index(False)
+
+            print("You can't craft it!", "You need more", data[missing].name)
+
+        time.sleep(2)
+
     def drop(self, item):
         self.items.remove(item)
 
@@ -66,7 +91,6 @@ class Player:
         
         if item in self.items:
             self.items.remove(item)
-            print("Removed")
 
 
     def giveItem(self, item):

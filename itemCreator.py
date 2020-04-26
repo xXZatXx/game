@@ -50,8 +50,11 @@ agl = input(": ")
 print("Chance")
 chance = input(": ")
 
+print("Recipe")
+recipe = input(": ")
 
-code = "item" + number + " = "+ typee + "(" + name + ", " + "\"" + "item" + number + "\"" + ", " + desc + ", " + price + ", " + hp + ", " + mp + ", " + strr + ", " + agl + ", " + chance + ")\n"
+
+code = "item" + number + " = "+ typee + "(" + name + ", " + "\"" + "item" + number + "\"" + ", " + desc + ", " + price + ", " + hp + ", " + mp + ", " + strr + ", " + agl + ", " + chance + ", " + recipe + ")\n"
 
 with open("items.py", "a") as f:
     f.write(code)

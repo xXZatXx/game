@@ -4,7 +4,7 @@ import os
 import random
 from classes import Enemy, Player
 from fighting import *
-from inventory import *
+from iclasses import *
 from items import *
 
 
@@ -233,9 +233,10 @@ def game():
         print("2 > Shop")
         print("3 > Inventory")
         print("4 > Player info")
-        print("5 > Save")
+        print("5 > Recipe Book")
+        print("6 > Save")
         print("")
-        print("6 > Exit")
+        print("7 > Exit")
         print("------------------\n")
 
         what = input(": ")
@@ -273,8 +274,6 @@ def game():
 
         elif what == "2":
             shop([item1, item2, item3])
-
-            
 
         elif what == "3": #inventory
             while True:
@@ -401,21 +400,24 @@ def game():
                         print("Wrong item number or nothing in inventory")
 
                 if invOp == "4": #droping an item
+                    try:
+                        print("Are you sure?")
+                        print("1 > Yes")
+                        print("2 > No")
+                        inp = input(": ")
 
-                    print("1 > Yes")
-                    print("2 > No")
-                    inp = input("Are you sure?")
+                        if inp == "1":
+                            try:
+                                whichItem = int(input("Item(number):"))
+                                whichItem -= 1 
+                                player1.drop(player1.data[whichItem])
+                            except:
+                                print("Something went wrong")
 
-                    if inp == "1":
-                        try:
-                            whichItem = int(input("Item(number):"))
-                            whichItem -= 1 
-                            player1.drop(player1.data[whichItem])
-                        except:
-                            print("Something went wrong")
-
-                    if inp == "2":
-                        pass
+                        if inp == "2":
+                            pass
+                    except:
+                        print("Something went wrong")
                 
                 if invOp == "3": #unequiping stuff
                     whichItem = int(input("Item(number):"))
@@ -437,10 +439,13 @@ def game():
 
             tempInp = input("Press Enter to return")
 
-        elif what == "5": #saving
+        elif what == "5":
+            player1.craft(item20)
+
+        elif what == "6": #saving
             save(int(player1.saveSlot))
 
-        elif what == "6": #exit
+        elif what == "7": #exit
             exit()
         
         elif what == "420":
@@ -511,8 +516,6 @@ if inp == "1" or inp == "start": #start the game
         else:
             print("An error happened")
 
-    
-
 elif inp == "2" or inp == "continue": #continue the game from saving slot
 
     if os.path.exists('save1.txt'):
@@ -573,10 +576,10 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
         for j in range(len(lol[2])):
             player1.on.append(globals()[lol[2][j]])
 
-        game()
-    
+        game()  
     
 elif inp == "3" or inp == "quit": #closes the game
     exit()
+
 else:
     print("Error: Wrong input")
