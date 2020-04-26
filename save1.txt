@@ -1,13 +1,17 @@
-NEW GUY
-Mage
-20
-80
+ZatX
+Warrior
 100
-8
+100
+50
+25
 10
 1
-29
+0
 200
-25
+0
+0
 1
-1
+item1
+item1
+item2
+ITEM4

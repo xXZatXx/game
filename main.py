@@ -137,15 +137,12 @@ def save(saveSlot): #saving the game
 def load(saveSlot): #loading the game
     with open("save" + str(saveSlot) + ".txt", "r") as f:
         for line in f:
-            info.append(line.replace("\n", ""))
-
-    with open("save" + str(saveSlot) + "i.txt", "r") as f2:
-        for line in f2:
-            items.append(line.replace("\n", ""))
-
-    with open("save" + str(saveSlot) + "e.txt", "r") as f3:
-        for line in f3:
-            eq.append(line.replace("\n", ""))
+            if "item" in line:
+                items.append(line.replace("\n", ""))
+            elif "ITEM" in line:
+                eq.append(line.replace("\n", "").lower())
+            else:
+                info.append(line.replace("\n", ""))
 
     if info == []:
         print("Nothing to load")
