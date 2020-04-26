@@ -5,6 +5,7 @@ import random
 from classes import Enemy, Player
 from fighting import *
 from inventory import *
+from items import *
 
 
 clear = lambda: os.system('cls')
@@ -118,7 +119,7 @@ def save(saveSlot): #saving the game
         f.write(str(player1.pClass) + "\n")
         f.write(str(player1.hp) + "\n")
         f.write(str(player1.maxHp) + "\n")
-        f.write(str(player1.mn) + "\n")
+        f.write(str(player1.mp) + "\n")
         f.write(str(player1.str) + "\n")
         f.write(str(player1.agl) + "\n")
         f.write(str(player1.lvl) + "\n")
@@ -183,31 +184,31 @@ def start():
         if pClass == "1" or pClass == "warrior":
             pClass = 0
             php = 100
-            pmn = 50
+            pmp = 50
             pstr = 20
             pagl = 10
 
-            player1 = Player(name, pClass, php, pmn, pstr, pagl)
+            player1 = Player(name, pClass, php, pmp, pstr, pagl)
             player1.giveItem(item4)
 
         elif pClass == "2" or pClass == "archer":
             pClass = 1
             php = 80
-            pmn = 50
+            pmp = 50
             pstr = 10
             pagl = 20
 
-            player1 = Player(name, pClass, php, pmn, pstr, pagl)
+            player1 = Player(name, pClass, php, pmp, pstr, pagl)
             player1.giveItem(item5)
 
         elif pClass == "3" or pClass == "mage":
             pClass = 2
             php = 80
-            pmn = 100
+            pmp = 100
             pstr = 5
             pagl = 10
 
-            player1 = Player(name, pClass, php, pmn, pstr, pagl)
+            player1 = Player(name, pClass, php, pmp, pstr, pagl)
             player1.giveItem(item6)
 
         else:
@@ -284,11 +285,11 @@ def game():
                 print("==================")
                 player1.showInv()
 
-                for i in range(len(player1.data)):
-                        try:
-                            print(player1.data[i].name)
-                        except:
-                            print(player1.data[i])
+                #for i in range(len(player1.data)):
+                #        try:
+                #            print(player1.data[i].name)
+                #        except:
+                #            print(player1.data[i])
 
                 print("==================")
                 print("1 > Use  2 > Info 3 > Unequip  4 > Drop  5 > Back")
@@ -472,7 +473,7 @@ if inp == "1" or inp == "start": #start the game
         print("1 > Save slot")
         sts = load(1)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("1 > Save slot")
         print("NOTHING THERE")
@@ -481,7 +482,7 @@ if inp == "1" or inp == "start": #start the game
         print("2 > Save slot")
         sts = load(2)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("2 > Save slot")
         print("NOTHING THERE")
@@ -490,7 +491,7 @@ if inp == "1" or inp == "start": #start the game
         print("3 > Save slot")
         sts = load(3)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("3 > Save slot")
         print("NOTHING THERE")
@@ -518,7 +519,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
         print("1 > Save slot")
         sts = load(1)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("1 > Save slot")
         print("NOTHING THERE")
@@ -527,7 +528,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
         print("2 > Save slot")
         sts = load(2)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("2 > Save slot")
         print("NOTHING THERE")
@@ -536,7 +537,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
         print("3 > Save slot")
         sts = load(3)
         info, items, eq = [], [], []
-        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MN", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
+        print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("3 > Save slot")
         print("NOTHING THERE")

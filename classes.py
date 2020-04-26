@@ -12,7 +12,7 @@ class Player:
         self.pClass = pClass
         self.hp = health
         self.maxHp = health 
-        self.mn = mana
+        self.mp = mana
         self.str = strength
         self.agl = agility
         self.money = 0
@@ -46,7 +46,7 @@ class Player:
     def unEquip(self, item):
         self.on.remove(item)
         self.hp -= item.hp 
-        self.mn -= item.mn 
+        self.mp -= item.mp
         self.str -= item.str
         self.agl -= item.agl
 
@@ -56,7 +56,7 @@ class Player:
         self.on.append(item)
         for i in range(len(self.on)):
             self.hp += self.on[i].hp 
-            self.mn += self.on[i].mn 
+            self.mp += self.on[i].mp
             self.str += self.on[i].str
             self.agl += self.on[i].agl
 
@@ -75,7 +75,7 @@ class Player:
     def showEquiped(self):
         print("[ Equiped ]")
         for i in range(len(self.on)):
-            print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MN", self.on[i].mn, "STR",self.on[i].str, "AGL",self.on[i].agl)
+            print(i+1, "|", self.on[i].name, "HP", self.on[i].hp, "MP", self.on[i].mp, "STR",self.on[i].str, "AGL",self.on[i].agl)
 
     def showInv(self):
         self.data = []
@@ -90,18 +90,37 @@ class Player:
                 self.names.append(self.items[i])
                 self.names.append(num)
         
+        allNames = []
+
+        for i in range(len(self.data)):
+            allNames.append(self.data[i].name)
+        longestName = max(allNames, key=len)
+        length = len(longestName) + 1
+        
         for i in range(self.bagLimit):
+            if i <= 8:
+                yeet = " |"
+            else:
+                yeet = "|"
+
             try:
-                print(i+1, "|", self.names[i*2].name, self.names[(i*2)+1])
+                nameLength = len(self.names[i*2].name) + 1
+                spaces = length - nameLength 
+
+                full = self.names[i*2].name + " " + (spaces*" ") + str(self.names[(i*2)+1])
+
+                print(i+1, yeet, full)
             except:
-                print(i+1, "|")
+                print(i+1, yeet)
+
+        
 
 
 
     def stats(self):
         clear()
         print("[", self.lvl, "]", "[ Name:", self.name, "]", "[ Class:", self.pClass, "]")
-        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|", "Money:", self.money, "$", "|")
+        print("| HP", self.hp, "/", self.maxHp, "MP", self.mp, "STR", self.str, "AGL", self.agl, "|", "Money:", self.money, "$", "|")
         self.xpBar()
         print("")
 
@@ -150,7 +169,7 @@ class Player:
         self.lvl += 1
         self.maxHp += 30
         self.str += 8
-        self.mn += 6
+        self.mp += 6
         self.agl += 5
         self.xp -= self.lvlXp
         self.lvlXp += 100 + int(round(self.hp/2, 0))
@@ -164,7 +183,7 @@ class Enemy:
         self.name = name
         self.hp = health
         self.maxHp = health
-        self.mn = mana
+        self.mp = mana
         self.str = strength
         self.agl = agility
         self.drop = drop
@@ -172,7 +191,7 @@ class Enemy:
 
     def stats(self):
         print("[ Enemy Name:", self.name, "]")
-        print("| HP", self.hp, "/", self.maxHp, "MN", self.mn, "STR", self.str, "AGL", self.agl, "|")
+        print("| HP", self.hp, "/", self.maxHp, "MP", self.mp, "STR", self.str, "AGL", self.agl, "|")
 
     def showHp(self):
         print("[ Enemy HP:", self.hp, "/", self.maxHp, "]")
