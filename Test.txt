@@ -1,0 +1,12 @@
+Hp
+Mp
+Str
+Agl
+item1
+item2
+item3
+item4
+skill1
+skill2
+skill3
+skill4

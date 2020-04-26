@@ -1,23 +1,36 @@
-import numpy as np
+Hp = "Hp"
+Mp = "Mp"
+Str = "Str"
+Agl = "Agl"
 
-item1 = "yes"
-item2 = "yess"
-item3 = "yesss"
+Items = ["Item1", "Item2", "Item3", "Item4"]
+Skills = ["Skill1", "Skill2", "Skill3", "Skill4"] 
 
-inventory = [item1, item2, item2, item2, item3, item3]
-crafting = [item1, item2, item2, item2, item1]
-data = list(dict.fromkeys(crafting))
-checking = []
+def save():
+    with open("Test.txt", "a") as f:
+        f.write(Hp + "\n")
+        f.write(Mp + "\n")
+        f.write(Str + "\n")
+        f.write(Agl + "\n")
+        for i in range(len(Items)):
+            f.write(Items[i] + "\n")
+        for i in range(len(Skills)):
+            f.write(Skills[i] + "\n")
 
-for i in range(len(data)):
-    if inventory.count(data[i]) >= crafting.count(data[i]):
-        checking.append(True)
-    else:
-        checking.append(False)
+def load():
+    data = []
+    items = []
 
-if all(checking):
-    print("Can craft")
-else:
-    print("Cant craft")
+    with open("Test.txt", "r") as f:
+        for line in f:
+            data.append(line.replace("\n", ""))
 
-print(checking)
+    player = data
+    
+    for i in range(len(player)):
+        if "item" in player[i]:
+            items.append(player[i])
+
+    print(items)
+
+load()
