@@ -42,6 +42,7 @@ class Player:
             print("Wrong Class")
 
     def craft(self, item):
+        clear()
         data = list(dict.fromkeys(item.recipe))
         checking = []
 
@@ -53,11 +54,14 @@ class Player:
 
         if all(checking):
             print("Crafting", item.name)
+            print("It will take", len(item.recipe), "s")
             for j in range(len(item.recipe)):
                 self.removeItem(item.recipe[j])
+                time.sleep(1)
+                print(len(item.recipe) - j)
 
             self.giveItem(globals()[item.varN])
-            time.sleep(2)
+            
         else:
             missing = checking.index(False)
 
