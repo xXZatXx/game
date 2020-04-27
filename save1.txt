@@ -1,4 +1,4 @@
-ZatX
+YEET
 Warrior
 100
 100
@@ -12,6 +12,4 @@ Warrior
 0
 1
 item1
-item1
-item2
-ITEM4
+ITEM150

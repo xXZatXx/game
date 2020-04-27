@@ -2,11 +2,12 @@ import random
 from random import randint
 
 class Item():
-    def __init__(self, name, varName, description, price, recipe):
+    def __init__(self, name, varName, description, price, chance, recipe):
         self.name = name
         self.desc = description
         self.varN = varName
         self.price = price
+        self.chance = chance
         self.recipe = recipe 
 
     def showDescription(self):
@@ -16,10 +17,7 @@ class Item():
 class Potion(Item):
     def __init__(self, name, varName, description, price, hpAmount, chance, recipe):
         self.hpAmount = hpAmount
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+        super().__init__(name, varName, description, price, chance, recipe)
 
     def heal(self, player):
         print(player.name, "has been healed")
@@ -34,19 +32,14 @@ class Weapon(Item):
         self.mp = mana
         self.str = strength
         self.agl = agility 
-        self.varN = varName
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+
+        super().__init__(name, varName, description, price, chance, recipe)
 
 class Bag(Item):
-    def __init__(self, name, varName, description, price, loot, recipe):
+    def __init__(self, name, varName, description, price, loot, chance, recipe):
         self.loot = loot
-        self.varN = varName
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+
+        super().__init__(name, varName, description, price, chance, recipe)
 
     def giveLoot(self, player):
         
@@ -64,11 +57,7 @@ class Helmet(Item):
         self.mp = mana
         self.str = strength
         self.agl = agility 
-        self.varN = varName
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+        super().__init__(name, varName, description, price, chance, recipe)
 
 class Chestplate(Item):
     def __init__(self, name, varName, description, price, health, mana, strength, agility, chance, recipe):
@@ -76,11 +65,7 @@ class Chestplate(Item):
         self.mp = mana
         self.str = strength
         self.agl = agility 
-        self.varN = varName
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+        super().__init__(name, varName, description, price, chance, recipe)
 
 class Leggings(Item):
     def __init__(self, name, varName, description, price, health, mana, strength, agility, chance, recipe):
@@ -88,11 +73,7 @@ class Leggings(Item):
         self.mp = mana
         self.str = strength
         self.agl = agility 
-        self.varN = varName
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+        super().__init__(name, varName, description, price, chance, recipe)
 
 class Boots(Item):
     def __init__(self, name, varName, description, price, health, mana, strength, agility, chance, recipe):
@@ -100,21 +81,12 @@ class Boots(Item):
         self.mp = mana
         self.str = strength
         self.agl = agility 
-        self.varN = varName
-        self.chance = chance
-        self.price = price
-        self.recipe = recipe
-        super().__init__(name, varName, description, price, recipe)
+        super().__init__(name, varName, description, price, chance, recipe)
 
 class CraftingScroll(Item):
-    def __init__(self, name, varName, description, price, chance, item):
-        self.varN = varName
-        self.chance = chance
-        self.price = price
+    def __init__(self, name, varName, description, price, chance, item, recipe):
         self.item = item
-        super().__init__(name, varName, description, price)
+        super().__init__(name, varName, description, price, chance, recipe)
 
-    def learn(self, player):
-        pass
         
     

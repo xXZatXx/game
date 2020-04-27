@@ -177,7 +177,7 @@ def start():
             pagl = 10
 
             player1 = Player(name, pClass, php, pmp, pstr, pagl)
-            player1.giveItem(item4)
+            player1.giveItem(item150)
 
         elif pClass == "2" or pClass == "archer":
             pClass = 1
@@ -187,7 +187,7 @@ def start():
             pagl = 20
 
             player1 = Player(name, pClass, php, pmp, pstr, pagl)
-            player1.giveItem(item5)
+            player1.giveItem(item151)
 
         elif pClass == "3" or pClass == "mage":
             pClass = 2
@@ -197,7 +197,7 @@ def start():
             pagl = 10
 
             player1 = Player(name, pClass, php, pmp, pstr, pagl)
-            player1.giveItem(item6)
+            player1.giveItem(item152)
 
         else:
             print("Error: Wrong class")
@@ -236,7 +236,7 @@ def game():
             print(rndNum)
 
             if rndNum in range(1, 5):
-                ogre = Enemy("Ogre", [item7, item1] ,50, 0, 15, 5, 20) 
+                ogre = Enemy("Ogre", [item20, item1] ,50, 0, 15, 5, 20) 
                 dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25, 15)
                 
                 enemies = [ogre, dwarf]
@@ -360,6 +360,13 @@ def game():
                                 player1.removeItem(player1.data[whichItem])
                             else:
                                 print("Bag is full")
+                            time.sleep(1)
+
+                        elif isinstance(player1.data[whichItem], CraftingScroll) == True: 
+                            #if is a craftingScroll
+                            player1.learnRecipe(player1.data[whichItem])
+                            player1.removeItem(player1.data[whichItem])
+                            
                             time.sleep(1)
 
                         else:

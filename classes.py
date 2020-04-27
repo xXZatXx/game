@@ -43,6 +43,10 @@ class Player:
         else: 
             print("Wrong Class")
 
+    def learnRecipe(self, item):
+        self.recipes.append(item.item)
+        self.removeItem(item)
+
     def craft(self, item):
         clear()
         data = list(dict.fromkeys(item.recipe))
