@@ -13,6 +13,7 @@ clear = lambda: os.system('cls')
 info = []
 items = []
 eq = []
+rc = []
 
 player1 = "none"
 
@@ -48,15 +49,19 @@ def shop(items): #a shop
 
             howM = int(input("How many(number):"))
             print("It will cost", (items[whichItem].price * howM), "$")
-            choice = input("Are you sure you wanna buy it?")
-            print("1 > Yes")
-            print("2 > No")
             
-            if choice == "1" or choice == "Yes":
+            print("1 > Buy 2 > Back to shop")
+            inp2 = input(": ")
+            
+            if inp2 == "1" or inp2 == "buy":
                 if player1.money >= (items[whichItem].price * howM):
                     player1.giveItem(items[whichItem])
                     print("You bought", items[whichItem].name, "for", (items[whichItem].price * howM), "$")
                     player1.money -= (items[whichItem].price * howM)
+                    time.sleep(1)
+                else:
+                    print("You are low on money, you can't buy it now")
+                    time.sleep(1)
             else:
                 pass
 
@@ -131,23 +136,28 @@ def save(saveSlot): #saving the game
         for i in range(len(player1.on)):
             f.write(str(player1.on[i].varN.upper() + "\n"))
 
+        for i in range(len(player1.recipes)):
+            f.write(str("iCtem" + player1.recipes[i].varN.replace("item", "") + "\n"))
+
     f.close()
 
-
 def load(saveSlot): #loading the game
+
     with open("save" + str(saveSlot) + ".txt", "r") as f:
         for line in f:
             if "item" in line:
                 items.append(line.replace("\n", ""))
             elif "ITEM" in line:
                 eq.append(line.replace("\n", "").lower())
+            elif "iCtem" in line:
+                rc.append(line.replace("C", "").replace("\n", ""))
             else:
                 info.append(line.replace("\n", ""))
 
     if info == []:
         print("Nothing to load")
     else:
-        return info, items, eq
+        return info, items, eq, rc
 
 def start():
     global player1
@@ -236,8 +246,8 @@ def game():
             print(rndNum)
 
             if rndNum in range(1, 5):
-                ogre = Enemy("Ogre", [item20, item1] ,50, 0, 15, 5, 20) 
-                dwarf = Enemy("Dwarf", [item1] ,40, 0, 15, 25, 15)
+                ogre = Enemy("Ogre", [item2, item70] ,50, 0, 15, 5, 20) 
+                dwarf = Enemy("Dwarf", [item70] ,40, 0, 15, 25, 15)
                 
                 enemies = [ogre, dwarf]
 
@@ -261,7 +271,7 @@ def game():
                     time.sleep(1)
 
         elif what == "2":
-            shop([item1, item2, item3])
+            shop([item1, item2, item3, item350])
 
         elif what == "3": #inventory
             while True:
@@ -362,20 +372,18 @@ def game():
                                 print("Bag is full")
                             time.sleep(1)
 
-                        elif isinstance(player1.data[whichItem], CraftingScroll) == True: 
+                        elif isinstance(player1.data[whichItem], CraftingScroll) == True:
                             #if is a craftingScroll
-                            player1.learnRecipe(player1.data[whichItem])
+                            player1.learnRecipe(globals()[player1.data[whichItem].varN])
                             player1.removeItem(player1.data[whichItem])
-                            
                             time.sleep(1)
 
                         else:
                             print("You can't use this item")
                             time.sleep(1)
-
                     except:
                         print("Wrong item number or nothing in inventory")
-                        time.sleep(1)
+                        time.sleep(5)
 
                 if invOp == "2": #info about items
                     whichItem = int(input("Item(number): "))
@@ -435,7 +443,22 @@ def game():
             tempInp = input("Press Enter to return")
 
         elif what == "5":
-            player1.craft(item20)
+            while True:
+                player1.showRecipes()
+
+                print("1 > Craft  2 > Back")
+                inp = input(": ")
+
+                if inp == "1" or inp == "craft":
+                    whichItem = int(input("Item(number): "))
+                    whichItem -= 1
+
+                    try:
+                        player1.craft(player1.recipes[whichItem])
+                    except:
+                        print("Error")
+                else:
+                    break
 
         elif what == "6": #saving
             save(int(player1.saveSlot))
@@ -458,7 +481,14 @@ def game():
                     print("Wrong item name")
             else:
                 print("Bag is full")
-            
+
+        elif "give money" in what:
+            what = what.replace("give money ", "")
+            what = int(what)
+            try:
+                player1.money += what
+            except:
+                print("yeet")
 
 print("IM JUST BORED THE GAME")
 print("1 > Start")
@@ -472,7 +502,7 @@ if inp == "1" or inp == "start": #start the game
     if os.path.exists('save1.txt'):
         print("1 > Save slot")
         sts = load(1)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("1 > Save slot")
@@ -481,7 +511,7 @@ if inp == "1" or inp == "start": #start the game
     if os.path.exists('save2.txt'):
         print("2 > Save slot")
         sts = load(2)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("2 > Save slot")
@@ -490,7 +520,7 @@ if inp == "1" or inp == "start": #start the game
     if os.path.exists('save3.txt'):
         print("3 > Save slot")
         sts = load(3)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("3 > Save slot")
@@ -516,7 +546,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
     if os.path.exists('save1.txt'):
         print("1 > Save slot")
         sts = load(1)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("1 > Save slot")
@@ -525,7 +555,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
     if os.path.exists('save2.txt'):
         print("2 > Save slot")
         sts = load(2)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("2 > Save slot")
@@ -534,7 +564,7 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
     if os.path.exists('save3.txt'):
         print("3 > Save slot")
         sts = load(3)
-        info, items, eq = [], [], []
+        info, items, eq, rc = [], [], [], []
         print("Name:", sts[0][0], "Class:", sts[0][1], "HP", sts[0][3], "MP", sts[0][4], "STR", sts[0][5], "AGL", sts[0][6])
     else:
         print("3 > Save slot")
@@ -570,6 +600,9 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
 
         for j in range(len(lol[2])):
             player1.on.append(globals()[lol[2][j]])
+
+        for k in range(len(lol[3])):
+            player1.recipes.append(globals()[lol[3][k]])
 
         game()  
     

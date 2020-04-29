@@ -12,4 +12,9 @@ Warrior
 0
 1
 item1
+item0
+item0
+item0
 ITEM150
+iCtem70
+iCtem71

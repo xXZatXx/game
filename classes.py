@@ -43,9 +43,48 @@ class Player:
         else: 
             print("Wrong Class")
 
+    def showRecipes(self):
+        print("[ Recipe Book ]")
+        print("==================")
+
+        for i in range(len(self.recipes)):
+            recipe = self.recipes[i].recipe
+
+            clear = []
+            amount = []
+            full = []
+            end = ""
+
+            for j in range(len(recipe)):
+                if recipe[j] in clear:
+                    pass
+                else:
+                    clear.append(recipe[j])
+
+            for j in range(len(clear)):
+                amount.append(recipe.count(clear[j]))
+
+
+            for j in range(len(clear)):
+                full.append(clear[j])
+                full.append(amount[j])
+
+            for j in range(len(full)):
+                try:
+                    end += str(full[j].name)
+                except:
+                    end += str(full[j]) + " "
+
+                end += " "
+
+            print(i+1, "|", self.recipes[i].name, "  " + end)
+        print("==================")
+
     def learnRecipe(self, item):
-        self.recipes.append(item.item)
-        self.removeItem(item)
+        print("You've learned", item.itemC.name)
+        self.recipes.append(item.itemC)
+
+        time.sleep(2)
 
     def craft(self, item):
         clear()
@@ -65,7 +104,7 @@ class Player:
                 self.removeItem(item.recipe[j])
                 time.sleep(1)
                 print(len(item.recipe) - j)
-
+            
             self.giveItem(globals()[item.varN])
             
         else:
@@ -127,8 +166,12 @@ class Player:
 
         for i in range(len(self.data)):
             allNames.append(self.data[i].name)
-        longestName = max(allNames, key=len)
-        length = len(longestName) + 1
+        
+        if allNames != []:
+            longestName = max(allNames, key=len)
+            length = len(longestName) + 1
+        else:
+            length = 1
         
         for i in range(self.bagLimit):
             if i <= 8:

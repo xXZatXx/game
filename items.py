@@ -1,9 +1,9 @@
 from iclasses import *
 
-item0 = Item("Herb", "item22", "You can use it to make potions", 5, 100, [])
-item1 = Potion("Small potion", "item1", "A small potion which heals 50hp", 20, 50, 100, [item0])
-item2 = Potion("Medium potion", "item2", "A slightly bigger potion than small potion, heals 80hp", 50, 80, 50, [])
-item3 = Potion("Big potion", "item3", "A potion which PROS use, heals 200hp", 90, 200, 1, [])
+item0 = Item("Herb", "item0", "You can use it to make potions", 5, 100, [])
+item1 = Item("Ogre scrap", "item1", "A scrap of ogres chestplate, can be used for crafting items", 5, 100, [])
+item2 = Item("Stick", "item2", "Just a stick", 5, 100, [])
+item3 = 0
 item4 = 0
 item5 = 0
 item6 = 0
@@ -20,9 +20,9 @@ item16 = 0
 item17 = 0
 item18 = 0
 item19 = 0
-item20 = Item("Ogre scrap", "item20", "A scrap of ogres chestplate, can be used for crafting items", 5, 100, [])
-item21 = Item("Stick", "item21", "Just a stick", 5, 100, [])
-item22 = Item("Herb", "item22", "You can use it to make potions", 5, 100, [])
+item20 = 0
+item21 = 0
+item22 = 0
 item23 = 0
 item24 = 0
 item25 = 0
@@ -70,9 +70,9 @@ item66 = 0
 item67 = 0
 item68 = 0
 item69 = 0
-item70 = 0
-item71 = 0
-item72 = 0
+item70 = Potion("Small potion", "item70", "A small potion which heals 50hp", 20, 50, 100, [item0, item0, item0])
+item71 = Potion("Medium potion", "item71", "A slightly bigger potion than small potion, heals 80hp", 50, 80, 50, [item0, item0, item0, item0, item0, item0, item1])
+item72 = Potion("Big potion", "item72", "A potion which PROS use, heals 200hp", 90, 200, 1, [])
 item73 = 0
 item74 = 0
 item75 = 0
@@ -300,7 +300,7 @@ item296 = 0
 item297 = 0
 item298 = 0
 item299 = 0
-item300 = Bag("Loot bag", "item300", "Gives you items", 60, [item1, item2], 20, [])
+item300 = Bag("Loot bag lvl1", "item300", "Gives you items", 60, [item1, item2], 20, [])
 item301 = 0
 item302 = 0
 item303 = 0
@@ -350,8 +350,8 @@ item346 = 0
 item347 = 0
 item348 = 0
 item349 = 0
-item350 = CraftingScroll("S Potion crafting scroll", "item130", "If you use it you will be able to create small potions", 200, 5, [item1], [])
-item351 = 0
+item350 = CraftingScroll("S Potion crafting scroll", "item350", "If you use it you will be able to create small potions", 200, 5, item70, [])
+item351 = CraftingScroll("M Potion crafting scroll", "item351", "If you use it you will be able to create medium potions", 500, 5, item71, [])
 item352 = 0
 item353 = 0
 item354 = 0
@@ -450,3 +450,10 @@ item446 = 0
 item447 = 0
 item448 = 0
 item449 = 0
+
+# 1     99 items
+# 100   149 drops
+# 150   199 weapons
+# 200   299 armor
+# 300   349 bags
+# 350   449 crafting scrolls

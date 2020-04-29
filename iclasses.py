@@ -85,7 +85,7 @@ class Boots(Item):
 
 class CraftingScroll(Item):
     def __init__(self, name, varName, description, price, chance, item, recipe):
-        self.item = item
+        self.itemC = item
         super().__init__(name, varName, description, price, chance, recipe)
 
         
