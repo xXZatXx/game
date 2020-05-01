@@ -35,6 +35,15 @@ class Weapon(Item):
 
         super().__init__(name, varName, description, price, chance, recipe)
 
+class Tool(Item):
+    def __init__(self, name, varName, description, price, health, mana, strength, agility, chance, recipe):
+        self.hp = health
+        self.mp = mana
+        self.str = strength
+        self.agl = agility 
+
+        super().__init__(name, varName, description, price, chance, recipe)
+
 class Bag(Item):
     def __init__(self, name, varName, description, price, loot, chance, recipe):
         self.loot = loot

@@ -18,8 +18,11 @@ class Player:
         self.agl = agility
         self.money = 0
         self.battles = 0
-        self.bagLimit = 10
+        self.bagLimit = 16
         self.saveSlot = 0
+
+        self.time = 0 
+        self.expLocation = "none"
         
         self.recipes = []
         self.items = []
@@ -173,7 +176,7 @@ class Player:
         else:
             length = 1
         
-        for i in range(self.bagLimit):
+        for i in range(len(self.data)):
             if i <= 8:
                 yeet = " |"
             else:

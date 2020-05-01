@@ -6,6 +6,8 @@ from classes import Enemy, Player
 from fighting import *
 from iclasses import *
 from items import *
+from town import shop, explore
+import threading
 
 
 clear = lambda: os.system('cls')
@@ -20,97 +22,9 @@ player1 = "none"
 #progress bar
 #print("[" + u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" u"\u25AE" + "]")
 
-def shop(items): #a shop
-    itemNames = []
-    for i in range(len(items)):
-        itemNames.append(items[i].name)
 
-    longestName = max(itemNames, key=len)
-    length = len(longestName)
-
-    while True:
-        clear()
-        print("[ SHOP ]")
-        print("==================")
-        for i in range(len(items)):
-            itemLength = len(items[i].name)
-            diff = length - itemLength 
-
-            print(i + 1, "|", items[i].name + ((diff + 2)*" "), items[i].price, "$")
-
-        print("==================")
-        print("1 > Buy  2 > Sell  3 > Back")
-
-        inp = input(": ")
-
-        if inp == "1":
-            whichItem = int(input("Item(number): "))
-            whichItem -= 1
-
-            howM = int(input("How many(number):"))
-            print("It will cost", (items[whichItem].price * howM), "$")
-            
-            print("1 > Buy 2 > Back to shop")
-            inp2 = input(": ")
-            
-            if inp2 == "1" or inp2 == "buy":
-                if player1.money >= (items[whichItem].price * howM):
-                    player1.giveItem(items[whichItem])
-                    print("You bought", items[whichItem].name, "for", (items[whichItem].price * howM), "$")
-                    player1.money -= (items[whichItem].price * howM)
-                    time.sleep(1)
-                else:
-                    print("You are low on money, you can't buy it now")
-                    time.sleep(1)
-            else:
-                pass
-
-        if inp == "2":
-            clear()
-            print("\n")
-            print("[ Inventory ]")
-            print("==================")
-            player1.showInv()
-            print("==================")
-
-            try:
-                whichItem = int(input("Item(number): "))
-                whichItem -= 1
-
-                print("You will get", int(round(player1.items[whichItem].price/2)), "$")
-                print("Are you sure you wanna sell it?")
-                print("1 > Yes")
-                print("2 > No")
-                choices = input(":")
-
-                if choices == "1" or choices == "Yes":
-                    player1.money += int(round(player1.items[whichItem].price/2))
-                    player1.removeItem(player1.items[whichItem])
-                else:
-                    pass
-
-            except:
-                print("Something went wrong try again :)")
-
-        if inp == "3":
-            break        
-
-        print("\n")
 
 def save(saveSlot): #saving the game
-    #self.name = name
-    #self.pClass = pClass
-    #self.hp = health
-    #self.maxHp = health 
-    #self.mn = mana
-    #self.str = strength
-    #self.agl = agility
-    #self.items = []
-    #self.on = []
-    #self.round = 1
-    #self.lvl = 1
-    #self.xp = 0
-    #self.lvlXp = 200
 
     if os.path.exists('save' + str(saveSlot) + '.txt'):
         os.remove('save' + str(saveSlot) + '.txt') 
@@ -129,6 +43,8 @@ def save(saveSlot): #saving the game
         f.write(str(player1.money) + "\n")
         f.write(str(player1.battles) + "\n")
         f.write(str(player1.saveSlot) + "\n")
+        f.write(str(player1.time) + "\n")
+        f.write(str(player1.expLocation) + "\n")
 
         for i in range(len(player1.items)):
             f.write(str(player1.items[i].varN + "\n"))
@@ -217,18 +133,29 @@ def start():
     player1.giveItem(item1)
     player1.saveSlot = slot
 
+def exploring():
+    while player1.time > 0:
+        player1.time -= 1
+        time.sleep(1)
+
+def startThreading():
+    explore = threading.Thread(target=exploring, args=())
+    explore.start()
+
 def game():
     while True:
         if player1.xp >= player1.lvlXp:
             player1.lvlup()
 
         player1.stats()
-        
+
+        startThreading()
+
         print("------------------")
         print("MENU")
         print("------------------")
         print("1 > Fight")
-        print("2 > Shop")
+        print("2 > Town")
         print("3 > Inventory")
         print("4 > Player info")
         print("5 > Recipe Book")
@@ -240,39 +167,56 @@ def game():
         what = input(": ")
 
         if what == "1":
-            print("Rolling the dice...")
-            time.sleep(2)
-            rndNum = randint(1, 6)
-            print(rndNum)
+            if player1.expLocation == "none":
+                print("Rolling the dice...")
+                time.sleep(2)
+                rndNum = randint(1, 6)
+                print(rndNum)
 
-            if rndNum in range(1, 5):
-                ogre = Enemy("Ogre", [item2, item70] ,50, 0, 15, 5, 20) 
-                dwarf = Enemy("Dwarf", [item70] ,40, 0, 15, 25, 15)
-                
-                enemies = [ogre, dwarf]
-
-                tempHp = battle(player1, random.choice(enemies))
-                player1.hp = tempHp
-                player1.round = 1
-                clear()
-
-            elif rndNum == 6 :
-                if player1.battles >= 10:
-                    ogreKing = Boss("Ogre King", [item1, item2, item3], 150, 10, 30, 15, 150, 400) 
+                if rndNum in range(1, 5):
+                    ogre = Enemy("Ogre", [item2, item70] ,50, 0, 15, 5, 20) 
+                    dwarf = Enemy("Dwarf", [item70] ,40, 0, 15, 25, 15)
                     
-                    enemies = [ogreKing]
+                    enemies = [ogre, dwarf]
 
                     tempHp = battle(player1, random.choice(enemies))
                     player1.hp = tempHp
                     player1.round = 1
                     clear()
-                else:
-                    print("Your battles arent over 10. You can't fight boss now")
-                    time.sleep(1)
+
+                elif rndNum == 6 :
+                    if player1.battles >= 10:
+                        ogreKing = Boss("Ogre King", [item1, item2, item3], 150, 10, 30, 15, 150, 400) 
+                        
+                        enemies = [ogreKing]
+
+                        tempHp = battle(player1, random.choice(enemies))
+                        player1.hp = tempHp
+                        player1.round = 1
+                        clear()
+                    else:
+                        print("Your battles arent over 10. You can't fight boss now")
+                        time.sleep(1)
+            else:
+                print("You are exploring now you can't fight")
+                time.sleep(1)
+
 
         elif what == "2":
-            shop([item1, item2, item3, item350])
+            print("TOWN")
+            print("------------------")
+            print("1 > Shop")
+            print("2 > Explore")
+            print("3 > Blacksmith")
+            print("------------------")
 
+            tempInp = input(": ")
+            if tempInp == "1":
+                shop([item70, item71, item72, item350], player1)
+            elif tempInp == "2":
+                explore(player1, "cave")
+            elif tempInp == "3":
+                pass
         elif what == "3": #inventory
             while True:
                 clear()
@@ -490,6 +434,7 @@ def game():
             except:
                 print("yeet")
 
+
 print("IM JUST BORED THE GAME")
 print("1 > Start")
 print("2 > Continue")
@@ -594,6 +539,8 @@ elif inp == "2" or inp == "continue": #continue the game from saving slot
         player1.money = int(lol[0][10])
         player1.battles = int(lol[0][11])
         player1.saveSlot = int(lol[0][12])
+        player1.time = int(lol[0][13])
+        player1.expLocation = lol[0][14]
 
         for i in range(len(lol[1])):
             player1.giveItem(globals()[lol[1][i]])

@@ -1,12 +1,12 @@
 from iclasses import *
 
-item0 = Item("Herb", "item0", "You can use it to make potions", 5, 100, [])
+item0 = Item("Herb", "item0", "You can use it to make potions", 8, 100, [])
 item1 = Item("Ogre scrap", "item1", "A scrap of ogres chestplate, can be used for crafting items", 5, 100, [])
 item2 = Item("Stick", "item2", "Just a stick", 5, 100, [])
-item3 = 0
-item4 = 0
-item5 = 0
-item6 = 0
+item3 = Item("Rock", "item3", "Just a stone what did you expect?", 5, 80, [])
+item4 = Item("Dead mouse", "item4", "Omg it stinks", 2, 60, [])
+item5 = Item("Broken Pickaxe", "item5", "I wonder if i can repair it somehow", 20, 35, [])
+item6 = Item("A piece of iron ore ", "item6", "Hmm maybe i can melt it or something", 35, 20, [])
 item7 = 0
 item8 = 0
 item9 = 0
